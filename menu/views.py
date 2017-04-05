@@ -4,8 +4,8 @@ from django.http import HttpResponse
 
 from menu.forms import McDonaldsOrderForm, TacoBellOrderForm
 
-def index(request):
-	return HttpResponse("Thanks for ordering!")
+def success(request):
+	return render(request, 'menu/success.html')
 
 def add_order_mcdonalds(request):
 	form = McDonaldsOrderForm()
@@ -21,7 +21,7 @@ def add_order_mcdonalds(request):
 			# We could give a confirmation message
 			# But since the most recent category added is on the index page 
 			# Then we can direct the user back to the index page.
-			return index(request)
+			return success(request)
 		else:
 		# The supplied form contained errors - 
 		# just print them to the terminal.
@@ -38,7 +38,7 @@ def add_order_tacobell(request):
 		form = TacoBellOrderForm(request.POST)
 		if form.is_valid():
 			form.save(commit=True)
-			return index(request)
+			return success(request)
 		else:
 			print(form.errors)
 

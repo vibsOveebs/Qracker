@@ -5,13 +5,31 @@
 	<title>Open Orders</title>
 </head>
 
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
 <body>
 	<h1>Open Orders</h1>
+	<a href="{% url 'index' %}"><strong>Return to home</strong></a><br><br>
 	<div>
 	{% if orders %}
 	<table>
 		<tr>
-			<th>Timestamp</th>
+			<th>Timestamp (GMT)</th>
 			<th>Name</th>
 			<th>Item Name</th>
 			<th>Restaurant</th>
