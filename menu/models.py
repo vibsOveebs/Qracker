@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-class Order(models Model):
+class Order(models.Model):
 	user_id = models.IntegerField()
 	item_name = models.CharField(max_length=128)
 	restaurant_name = models.CharField(max_length=128)
