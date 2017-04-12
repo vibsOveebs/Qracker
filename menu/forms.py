@@ -10,7 +10,7 @@ class McDonaldsOrderForm(forms.ModelForm):
 		("Egg McMuffin", "Egg McMuffin"), 
 		("Sausage", "Sausage")))
 	restaurant_name = forms.CharField(widget=forms.HiddenInput(), initial='McDonalds')
-	creation_time = forms.DateTimeField(widget=forms.HiddenInput(), initial=datetime.now())
+	creation_time = forms.DateTimeField(widget=forms.HiddenInput(), initial=datetime.now)
 
     # An inline class to provide additional information on the form.
 	class Meta:
@@ -26,7 +26,7 @@ class TacoBellOrderForm(forms.ModelForm):
 		("Crunch Wrap", "Crunch Wrap"), 
 		("Baja Blast", "Baja Blast")))
 	restaurant_name = forms.CharField(widget=forms.HiddenInput(), initial='Taco Bell')
-	creation_time = forms.DateTimeField(widget=forms.HiddenInput(), initial=datetime.now())
+	creation_time = forms.DateTimeField(widget=forms.HiddenInput(), initial=datetime.now)
 
     # An inline class to provide additional information on the form.
 	class Meta:
