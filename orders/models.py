@@ -2,11 +2,10 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from datetime import datetime
-
 from django.contrib.auth.models import User
 
 from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class Transaction(models.Model):
     # Transactions entity
@@ -36,4 +35,3 @@ class Transaction(models.Model):
 
     def __unicode__(self):
         return id
-
