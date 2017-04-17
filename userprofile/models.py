@@ -39,6 +39,14 @@ class Payment(models.Model):
         validators=[MaxValueValidator(99), MinValueValidator(00)]
     )
 
+    # Links UserProfile to a User model instance.
+    user = models.OneToOneField(User)
+
+    # The additional attributes to include
+    location = models.CharField(max_length = 128)
+    phone_number = models.IntegerField()
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
     def __str__(self):
         return self.user.username
 

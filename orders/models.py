@@ -21,13 +21,13 @@ class Transaction(models.Model):
 
     # Feedback entity
     timeliness = models.IntegerField(
-        validators=[MaxValueValidator(5), MinValueValidator(1)]
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
     friendliness = models.IntegerField(
-        validators=[MaxValueValidator(5), MinValueValidator(1)]
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
     responsetime = models.IntegerField(
-        validators=[MaxValueValidator(5), MinValueValidator(1)]
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
     text_feedback = models.CharField(max_length=140)
 
