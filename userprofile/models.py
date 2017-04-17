@@ -16,8 +16,6 @@ class UserProfile(models.Model):
     phone_number = models.IntegerField()
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
-    # Override the __unicode__() method to return out something meaningful!
-    # Remember if you use Python 2.7.x, define __unicode__ too!
     def __str__(self):
         return self.user.username
 
@@ -33,10 +31,10 @@ class Payment(models.Model):
     creditcard_number = models.CharField(max_length=16)
     security_code = models.CharField(max_length=3)
     expiration_month = models.IntegerField(
-        validators=[MaxValueValidator(12), MinValueValidator(1)]
+        validators=[MinValueValidator(1), MaxValueValidator(12)]
     )
     expiration_year = models.IntegerField(
-        validators=[MaxValueValidator(99), MinValueValidator(00)]
+        validators=[MinValueValidator(00), MaxValueValidator(99)]
     )
 
     def __str__(self):
@@ -44,3 +42,15 @@ class Payment(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+class Levels(models.Model):
+    number_transactions = models.IntegerField()
+    level = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(100)]
+    )
+
+    def __str__(self):
+        return self.number_transactions
+
+    def __unicode__(self):
+        return self.number_transactions
