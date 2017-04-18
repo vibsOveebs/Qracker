@@ -25,7 +25,8 @@ SECRET_KEY = 'qv9&23k=1&cw+430b2i&wkz#w6fzl6pgssb0i!q+=-84yen15r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['OCDizordr.dlinkddns.com', # Keegan's DynamicDNS thing
+                 ]
 
 # Application definition
 
@@ -113,7 +114,7 @@ PASSWORD_HASHERS = (
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
