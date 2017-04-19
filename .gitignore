@@ -9,5 +9,8 @@ media/*
 # Compiled python files
 *.pyc
 
+# PyCharm Files
+.idea/*
+
 # Mac artifacts
 .DS_Store
