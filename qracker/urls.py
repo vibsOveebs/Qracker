@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.conf.urls import include
 from menu import views
 from orders import views
+from userprofile import views
 from qracker import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^menu/', include('menu.urls')),
     url(r'^orders/', include('orders.urls')),
+    url(r'^userprofile/', include('userprofile.urls')),
     url(r'^$', views.index, name='index')
 ]

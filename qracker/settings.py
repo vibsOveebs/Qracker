@@ -25,8 +25,10 @@ SECRET_KEY = 'qv9&23k=1&cw+430b2i&wkz#w6fzl6pgssb0i!q+=-84yen15r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['OCDizordr.dlinkddns.com', # Keegan's DynamicDNS thing
-                 ]
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'OCDizordr.dlinkddns.com', # Keegan's DynamicDNS thing
+]
 
 # Application definition
 
@@ -65,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -127,3 +130,8 @@ USE_TZ = True
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/static/'
+
+# Media files (profile pictures)
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'

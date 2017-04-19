@@ -3,6 +3,9 @@ menu/migrations/*
 orders/migrations/*
 userprofile/migrations/*
 
+# Media
+media/*
+
 # Compiled python files
 *.pyc
 
