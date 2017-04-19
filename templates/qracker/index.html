@@ -33,9 +33,12 @@ tr:nth-child(even) {
 </style>
 
 <div>
-    <a href="/menu/mcdonalds/">McDonald's Menu</a><br/>
-    <a href="/menu/tacobell/">Taco Bell Menu</a><br/>
-    <a href="/orders/open/">Open Orders</a><br/>
+    <ul>
+        <li><a href="{% url 'mcdonalds' %}">McDonald's Menu</a></li>
+        <li><a href="{% url 'tacobell' %}">Taco Bell Menu</a></li>
+        <li><a href="{% url 'open_orders' %}">Open Orders</a></li>
+        <li><a href="{% url 'register' %}">Sign Up</a></li>
+    </ul>
 </div>
 
 </body>
