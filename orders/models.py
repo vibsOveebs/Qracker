@@ -35,3 +35,4 @@ class Transaction(models.Model):
 
     def __unicode__(self):
         return id
+
