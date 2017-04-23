@@ -1,6 +1,9 @@
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
-
 from userprofile.forms import UserForm, UserProfileForm
+
 
 def register(request):
 
@@ -59,3 +62,31 @@ def register(request):
                       {'user_form': user_form,
                        'profile_form': profile_form,
                        'registered': registered})
+
+
+def user_login(request):
+    if request.method == 'POST':
+        # get username and password
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # authenticate: if successful, user object returned
+        user = authenticate(username=username,password=password)
+
+        # if successful authentication
+        if user:
+            # check if active
+            if user.is_active:
+                # login and return to homepage
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse("Your account is disabled. Please contact the system administrator.")
+
+        # else bad login details
+        else:
+            print("Invalid authentication details.")
+            return HttpResponse("Invalid authentication details")
+
+    else:
+        return render(request, 'userprofile/login.html', {})
