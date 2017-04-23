@@ -1,22 +1,12 @@
 from django import forms
 from menu.models import Order, Item
-from menu.models import Item
 from datetime import datetime
-from django.contrib.auth.models import User
+
 
 class additemform(forms.ModelForm):
-    supplier=forms.ForeignKey(User)
-    name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
-    FOOD_OR_DRINK_CHOICE=forms.ChoiceField(choices=(
-        ("Food","Food"),
-        ("Drink","Drink")))
-    is_breakfast=forms.BooleanField(required=False)
-    is_lunch=forms.BooleanField(required=False)
-    Promo_flag=forms.BooleanField(required=False)
-    price=forms.DecimalField(help_text="Please enter the price: ",min_value=0,required=True)
-
     class Meta:
-        model=Item
+        model = Item
+        exclude = ['supplier']
 
 
 class McDonaldsOrderForm(forms.ModelForm):
