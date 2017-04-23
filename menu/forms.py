@@ -8,14 +8,13 @@ class additemform(forms.ModelForm):
     food_or_drink=forms.ChoiceField(choices=(
         ("Food","Food"),
         ("Drink","Drink")))
-    is_breakfast=forms.BooleanField(required=False)
-    is_lunch=forms.BooleanField(required=False)
-    promo_flag=forms.BooleanField(required=False)
+    is_breakfast=forms.BooleanField(help_text = 'Breakfast Food?', required=False)
+    is_lunch=forms.BooleanField(help_text='Lunch Food?',required=False)
     price=forms.DecimalField(help_text="Please enter the price: ",min_value=0,required=True)
 
     class Meta:
         model = Item
-        exclude = ['supplier']
+        exclude = ['supplier', 'promo_flag']
 
 
 class McDonaldsOrderForm(forms.ModelForm):
