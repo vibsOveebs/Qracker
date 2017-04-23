@@ -6,6 +6,17 @@ from django.contrib.auth.decorators import user_passes_test
 def add_menuitem(request):
     form = additemform()
 
+    if request.method == 'POST':
+        form = additemform(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return success(request)
+        else:
+            print(form.errors)
+
+    return render(request, "menu/add_item.html", {'form': form})
+
+
 def success(request):
     return render(request, 'menu/success.html')
 
