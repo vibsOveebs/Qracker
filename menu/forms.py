@@ -10,22 +10,10 @@ class additemform(forms.ModelForm):
     is_breakfast=forms.BooleanField(help_text = 'Breakfast Food?', required=False)
     is_lunch=forms.BooleanField(help_text = 'Lunch Food?', required=False)
     price=forms.DecimalField(help_text="Please enter the price: ",min_value=0,required=True)
-
+    
     class Meta:
         model = Item
-        exclude = ['supplier', 'promo_flag']
-
-    def __init__(self, *args, **kwargs):
-        self._user = kwargs.pop('user')
-        super(additemform, self).__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        inst = super(additemform, self).save(commit=False)
-        inst.author = self._user
-        if commit:
-            inst.save()
-            self.save_m2m()
-        return inst
+        exclude = ['promo_flag']
 
 class McDonaldsOrderForm(forms.ModelForm):
     user_name = forms.CharField(help_text="Please enter your name: ", max_length=128, required=True)
