@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-from menu.forms import McDonaldsOrderForm, TacoBellOrderForm
+from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, SearchForm
+from menu.models import Item
 
 
 def success(request):
@@ -46,3 +47,27 @@ def add_order_tacobell(request):
             print(form.errors)
 
     return render(request, 'menu/add_order_tacobell.html', {'form': form})
+
+
+# search view
+def search(request):
+    form = SearchForm()
+
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            searchstring = request.GET.get('searchstring')
+            food_or_drink = request.GET.get('food_or_drink')
+            is_breakfast = request.GET.get('is_breakfast')
+            is_lunch = request.GET.get('is_lunch')
+
+            results = Item.objects.filter(
+                food_or_drink__exact=food_or_drink
+            ).filter(
+                is_breakfast__exact=is_breakfast
+            ).filter(
+                is_lunch__exact=is_lunch
+            ).filter(
+                name__icontains=searchstring
+            )
+            return render('menu/results.html', results)

@@ -12,8 +12,9 @@ class Item(models.Model):
     food_or_drink = models.CharField(max_length=5, choices=FOOD_OR_DRINK_CHOICES)
     is_breakfast = models.BooleanField(default=False)
     is_lunch = models.BooleanField(default=False)
-    promo_flag = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+
+    promo_flag = models.BooleanField(default=False)
     supplier = models.ForeignKey(User)
 
     def __str__(self):
