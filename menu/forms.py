@@ -4,7 +4,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 class additemform(forms.ModelForm):
-    supplier=forms.Foreignkey(User)
+    supplier=forms.ForeignKey(User)
     name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
     FOOD_OR_DRINK_CHOICE=forms.ChoiceField(choices=(
         ("Food","Food"),
