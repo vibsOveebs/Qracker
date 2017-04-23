@@ -2,19 +2,22 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-from menu.forms import McDonaldsOrderForm, TacoBellOrderForm
+from menu.forms import McDonaldsOrderForm, TacoBellOrderForm,additemform
 
 
 def success(request):
     return render(request, 'menu/success.html')
 
 
-def add_order_mcdonalds(request):
-    form = McDonaldsOrderForm()
+def add_item(request):
+    form=additemform()
+
+def add_menuitem(request):
+    form = additemform()
 
     # A HTTP POST?
     if request.method == 'POST':
-        form = McDonaldsOrderForm(request.POST)
+        form = additemform(request.POST)
         # Have we been provided with a valid form?
         if form.is_valid():
             # Save the new category to the database.
@@ -31,7 +34,7 @@ def add_order_mcdonalds(request):
 
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
-    return render(request, 'menu/add_order_mcdonalds.html', {'form': form})
+    return render(request, "menu/add_item.html", {'form': form})
 
 
 def add_order_tacobell(request):
