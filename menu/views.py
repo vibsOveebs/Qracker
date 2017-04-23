@@ -56,4 +56,4 @@ def search(request):
             ).filter(
                 name__icontains=searchstring
             )
-            return render('menu/results.html', results)
+            return render(request, 'menu/results.html', results)
