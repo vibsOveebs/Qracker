@@ -1,0 +1,22 @@
+{% extends 'qracker/base.html %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Add Items
+{ endblock %}
+
+{% block body_block %}
+    <form id="order_form" method="post" action="/menu/additem/">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+        {{ field.errors }}
+        {{ field.help_text }}
+        {{ field }}
+        <br>
+        {% endfor %}
+        <input type="submit" name="submit" value="Create Item"/>
+    </form>
+{% endblock %}

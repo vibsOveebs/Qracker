@@ -9,7 +9,7 @@ class Item(models.Model):
         ('Drink', 'Drink')
     )
     name = models.CharField(max_length=100)
-    food_or_drink = models.CharField(max_length=5, choices=FOOD_OR_DRINK_CHOICES)
+    #food_or_drink = models.CharField(max_length=5, choices=FOOD_OR_DRINK_CHOICES)
     is_breakfast = models.BooleanField(default=False)
     is_lunch = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=5, decimal_places=2)
