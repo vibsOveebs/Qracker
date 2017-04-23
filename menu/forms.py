@@ -17,10 +17,10 @@ class additemform(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self._user = kwargs.pop('user')
-        super(ReviewForm, self).__init__(*args, **kwargs)
+        super(additemform, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        inst = super(ReviewForm, self).save(commit=False)
+        inst = super(additemform, self).save(commit=False)
         inst.author = self._user
         if commit:
             inst.save()
