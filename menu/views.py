@@ -4,10 +4,6 @@ from menu.models import Item
 from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, additemform
 
 
-def success(request):
-    return render(request, 'menu/success.html')
-
-
 def add_menuitem(request):
     form = additemform()
 
@@ -31,6 +27,10 @@ def add_menuitem(request):
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
     return render(request, "menu/add_item.html", {'form': form})
+
+
+def success(request):
+    return render(request, 'menu/success.html')
 
 
 def add_order_tacobell(request):
