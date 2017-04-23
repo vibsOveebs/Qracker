@@ -1,0 +1,17 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Browse
+{% endblock %}
+
+{% block body_block %}
+	<h1>Browse Items</h1>
+
+	<form id="order_form" method="post" action="/menu/tacobell/">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" name="submit" value="Display"/>
+	</form>
+
+{% endblock %}

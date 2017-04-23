@@ -1,11 +1,19 @@
 from django.shortcuts import render
-from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, SearchForm, additemform
+from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, additemform, BrowseForm
 from menu.models import Item
-
+from django.contrib.auth.decorators import user_passes_test
 
 def add_menuitem(request):
     form = additemform()
 
+def success(request):
+    return render(request, 'menu/success.html')
+
+@user_passes_test(lambda u: Group.objects.get(name='customer') in u.groups.all())
+def add_order_mcdonalds(request):
+    form = McDonaldsOrderForm()
+
+    # A HTTP POST?
     if request.method == 'POST':
         form = additemform(request.POST)
         if form.is_valid():
@@ -34,7 +42,6 @@ def add_order_tacobell(request):
 
     return render(request, 'menu/add_order_tacobell.html', {'form': form})
 
-
 # search view
 def search(request):
     #form = SearchForm()
@@ -57,3 +64,8 @@ def search(request):
                 name__icontains=searchstring
             )
             return render(request, 'menu/results.html', results)
+
+def browse(request):
+    form = BrowseForm()
+    return render(request, 'menu/browse.html', {'form': form})
+
