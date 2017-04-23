@@ -47,6 +47,19 @@ class TacoBellOrderForm(forms.ModelForm):
         model = Order
         fields = ('user_name', 'item_name', 'restaurant_name', 'creation_time')
 
+# search form
+class SearchForm(forms.ModelForm):
+    searchstring = forms.CharField(max_length=128)
+    food_or_drink = forms.ChoiceField(choices=(
+        ('Food', 'Food'),
+        ('Drink', 'Drink'),
+    ))
+    is_breakfast = forms.BooleanField(initial=False)
+    is_lunch = forms.BooleanField(initial=False)
+    class Meta:
+        model =Item
+        fields = ('searchstring', 'food_or_drink', 'is_breakfast', 'is_lunch') 
+
 class BrowseForm(forms.Form):
     RESTAURANT_CHOICES = (
         ('Starbucks', 'Starbucks'),
