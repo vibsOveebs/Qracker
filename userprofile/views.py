@@ -89,4 +89,4 @@ def user_login(request):
             return HttpResponse("Invalid authentication details")
 
     else:
-        return render(request, 'template/userprofile/login.html', {})
+        return render(request, 'userprofile/login.html', {})
