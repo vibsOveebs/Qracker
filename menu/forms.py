@@ -1,4 +1,5 @@
 from django import forms
+from menu.models import Order, Item
 from menu.models import Item
 from datetime import datetime
 from django.contrib.auth.models import User
@@ -16,7 +17,6 @@ class additemform(forms.ModelForm):
 
     class Meta:
         model=Item
-
 
 
 class McDonaldsOrderForm(forms.ModelForm):
@@ -51,3 +51,18 @@ class TacoBellOrderForm(forms.ModelForm):
         # Provide an association between the ModelForm and a model
         model = Order
         fields = ('user_name', 'item_name', 'restaurant_name', 'creation_time')
+
+
+# search form
+class SearchForm(forms.ModelForm):
+    searchstring = forms.CharField(max_length=128)
+    food_or_drink = forms.ChoiceField(choices=(
+        ('Food', 'Food'),
+        ('Drink', 'Drink')
+    ))
+    is_breakfast = forms.BooleanField(initial=False)
+    is_lunch = forms.BooleanField(initial=False)
+
+    class Meta:
+        model =Item
+        fields = ('searchstring', 'food_or_drink', 'is_breakfast', 'is_lunch')
