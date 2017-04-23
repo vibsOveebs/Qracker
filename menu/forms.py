@@ -4,6 +4,15 @@ from datetime import datetime
 
 
 class additemform(forms.ModelForm):
+    name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
+    food_or_drink=forms.ChoiceField(choices=(
+        ("Food","Food"),
+        ("Drink","Drink")))
+    is_breakfast=forms.BooleanField(required=False)
+    is_lunch=forms.BooleanField(required=False)
+    promo_flag=forms.BooleanField(required=False)
+    price=forms.DecimalField(help_text="Please enter the price: ",min_value=0,required=True)
+
     class Meta:
         model = Item
         exclude = ['supplier']
