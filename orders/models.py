@@ -4,6 +4,8 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+from menu.models import Item
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -36,3 +38,13 @@ class Transaction(models.Model):
     def __unicode__(self):
         return id
 
+class Cart(models.Model):
+    transaction = models.ForeignKey(Transaction)
+    item = models.ForeignKey(Item)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return id
+
+    def __unicode__(self):
+        return id

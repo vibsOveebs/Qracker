@@ -1,23 +1,18 @@
 from django import forms
-from menu.models import Item
+from menu.models import Order, Item
 from datetime import datetime
-from django.contrib.auth.models import User
 
 class additemform(forms.ModelForm):
-    supplier=forms.ForeignKey(User)
     name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
-    FOOD_OR_DRINK_CHOICE=forms.ChoiceField(choices=(
+    food_or_drink=forms.ChoiceField(choices=(
         ("Food","Food"),
         ("Drink","Drink")))
-    is_breakfast=forms.BooleanField(required=False)
-    is_lunch=forms.BooleanField(required=False)
-    Promo_flag=forms.BooleanField(required=False)
+    is_breakfast=forms.BooleanField(help_text = 'Breakfast Food?', required=False)
     price=forms.DecimalField(help_text="Please enter the price: ",min_value=0,required=True)
 
     class Meta:
-        model=Item
-
-
+        model = Item
+        exclude = ['supplier', 'promo_flag']
 
 class McDonaldsOrderForm(forms.ModelForm):
     user_name = forms.CharField(help_text="Please enter your name: ", max_length=128, required=True)
@@ -51,3 +46,22 @@ class TacoBellOrderForm(forms.ModelForm):
         # Provide an association between the ModelForm and a model
         model = Order
         fields = ('user_name', 'item_name', 'restaurant_name', 'creation_time')
+
+class BrowseForm(forms.Form):
+    RESTAURANT_CHOICES = (
+        ('Starbucks', 'Starbucks'),
+        ('McDonalds', 'McDonalds'),
+        ('TacoBell', 'TacoBell'),
+    )
+    FOOD_OR_DRINK_CHOICES = (
+        ('Food', 'Food'),
+        ('Drink', 'Drink'),
+    )
+    BREAKFAST_OR_LUNCH_CHOICES = (
+        ('Breakfast', 'Breakfast'),
+        ('Lunch', 'Lunch')
+    )
+
+    restaurant_name = forms.ChoiceField(choices = RESTAURANT_CHOICES, label='Restauarnt', initial='', widget=forms.Select(), required = True)
+    food_or_drink = forms.MultipleChoiceField(choices = FOOD_OR_DRINK_CHOICES, label='Food or Drink', widget=forms.CheckboxSelectMultiple(), required = True)
+    breakfast_or_lunch = forms.MultipleChoiceField(choices = BREAKFAST_OR_LUNCH_CHOICES, label='Breakfast or Lunch', widget=forms.CheckboxSelectMultiple(), required = True)

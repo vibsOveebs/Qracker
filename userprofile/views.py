@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
@@ -25,6 +26,10 @@ def register(request):
             # Now we hash the password with the set_password method. 
             # Once hashed, we can update the user object. 
             user.set_password(user.password)
+
+            # Add user to user group
+            user.groups.add(Group.objects.get(name='customer'))
+
             user.save()
 
             # Now sort out the UserProfile instance.
