@@ -9,7 +9,6 @@ class additemform(forms.ModelForm):
         ("Food","Food"),
         ("Drink","Drink")))
     is_breakfast=forms.BooleanField(help_text = 'Breakfast Food?', required=False)
-    is_lunch=forms.BooleanField(help_text='Lunch Food?',required=False)
     price=forms.DecimalField(help_text="Please enter the price: ",min_value=0,required=True)
 
     class Meta:
