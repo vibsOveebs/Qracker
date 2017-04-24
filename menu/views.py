@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, additemform, BrowseForm, SearchForm
+from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, AddItemForm, BrowseForm, SearchForm
 from menu.models import Item
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 
 
-def add_menuitem(request):
-    form = additemform()
+def add_menu_item(request):
+    form = AddItemForm()
 
     if request.method == 'POST':
-        form = additemform(request.POST)
+        form = AddItemForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
             return success(request)

@@ -4,7 +4,7 @@ from datetime import datetime
 from userprofile.models import UserProfile
 
 
-class additemform(forms.ModelForm):
+class AddItemForm(forms.ModelForm):
     name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
     food_or_drink=forms.ChoiceField(choices=(
         ("Food","Food"),
