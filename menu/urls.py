@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^additem', views.add_menu_item, name='additem'),
     url(r'^search', views.search, name='search'),
     url(r'^browse', views.browse, name='browse'),
+    url(r'^browseresults', views.browseresults, name='browseresults')
 ]
