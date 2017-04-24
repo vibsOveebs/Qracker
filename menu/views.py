@@ -24,6 +24,14 @@ def success(request):
 # search view
 def search(request):
     form = SearchForm()
+
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            return results(request)
+        else:
+            print(form.errors)
+
     return render(request, 'menu/search.html', {'form': form})
 
 
@@ -44,6 +52,8 @@ def results(request):
         is_lunch__exact=is_lunch
     ).filter(
         name__icontains=searchstring
+    ).order_by(
+        '-promotional_flag'
     )
 
     # ORDER RESULTS BY PROMO FLAG THEN BY POPULARITY
