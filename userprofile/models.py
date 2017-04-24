@@ -12,6 +12,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
     # The additional attributes we wish to include.
+    supplier_flag = models.BooleanField(default=False)
     location = models.CharField(max_length=128)
     phone_number = models.IntegerField()
     picture = models.ImageField(upload_to='profile_images', blank=True)

@@ -14,6 +14,10 @@ class Transaction(models.Model):
     creation_time = models.DateTimeField()
     delivery_time = models.DateTimeField()
     pickup_loc = models.CharField(max_length=64)
+
+    item = models.ForeignKey(Item)
+    quantity = models.IntegerField()
+
     code_word = models.CharField(max_length=32)
 
     # Initiates and Delivers relationships
@@ -31,17 +35,6 @@ class Transaction(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
     text_feedback = models.CharField(max_length=140)
-
-    def __str__(self):
-        return id
-
-    def __unicode__(self):
-        return id
-
-class Cart(models.Model):
-    transaction = models.ForeignKey(Transaction)
-    item = models.ForeignKey(Item)
-    quantity = models.IntegerField()
 
     def __str__(self):
         return id
