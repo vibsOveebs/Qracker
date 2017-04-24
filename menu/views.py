@@ -3,6 +3,7 @@ from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, AddItemForm, Brows
 from menu.models import Item
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 def add_menu_item(request):
@@ -93,7 +94,32 @@ def browseresults(request):
     is_breakfast = request.POST.get('is_breakfast')
     is_lunch = request.POST.get('is_lunch')
 
-    item_list = Item.objects.filter(supplier=restaurant_name)
+    if (is_food and is_drink):
+        FOOD = 'FOOD'
+        DRINK = 'DRINK'
+    elif (is_food):
+        FOOD = 'FOOD'
+        DRINK = -1
+    elif (is_drink):
+        FOOD = -1
+        DRINK = 'DRINK'
+    else:
+        FOOD = 'FOOD'
+        DRINK = 'DRINK'
+
+    if (is_breakfast and is_lunch):
+        item_list = Item.objects.filter(supplier=restaurant_name).filter(
+            Q(food_or_drink=FOOD)|Q(food_or_drink=DRINK))
+    elif (is_breakfast and not is_lunch):
+        item_list = Item.objects.filter(supplier=restaurant_name).filter(is_breakfast=True).filter(
+            Q(food_or_drink=FOOD)|Q(food_or_drink=DRINK))
+    elif (not is_breakfast and is_lunch):
+        item_list = Item.objects.filter(supplier=restaurant_name).filter(is_lunch=True).filter(
+            Q(food_or_drink=FOOD)|Q(food_or_drink=DRINK))
+    else:
+        item_list = Item.objects.filter(supplier=restaurant_name).filter(
+            Q(food_or_drink=FOOD)|Q(food_or_drink=DRINK))
+
     context_dict = {'items': item_list}
 
     return render(request, 'menu/browseresults.html', context_dict)
