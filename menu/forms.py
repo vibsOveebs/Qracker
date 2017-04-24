@@ -21,13 +21,13 @@ class AddItemForm(forms.ModelForm):
 
 # search form
 class SearchForm(forms.ModelForm):
-    searchstring = forms.CharField(max_length=128)
-    food_or_drink = forms.ChoiceField(choices=(
+    searchstring = forms.CharField(help_text= 'Item Name: ', max_length=128, required=False)
+    food_or_drink = forms.ChoiceField(help_text='Select if Food or Drink',choices=(
         ('Food', 'Food'),
         ('Drink', 'Drink'),
-    ))
-    is_breakfast = forms.BooleanField(initial=False)
-    is_lunch = forms.BooleanField(initial=False)
+    ), required=False)
+    is_breakfast = forms.BooleanField(help_text='Breakfast?',initial=False, required=False)
+    is_lunch = forms.BooleanField(help_text='Lunch?',initial=False, required=False)
 
     class Meta:
         model = Item
