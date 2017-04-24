@@ -2,7 +2,7 @@ from django import forms
 from menu.models import Order, Item
 from datetime import datetime
 
-class additemform(forms.ModelForm):
+class AddItemForm(forms.ModelForm):
     name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
     food_or_drink=forms.ChoiceField(choices=(
         ("Food","Food"),
