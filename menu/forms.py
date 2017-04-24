@@ -9,8 +9,8 @@ class AddItemForm(forms.ModelForm):
     food_or_drink=forms.ChoiceField(choices=(
         ("Food","Food"),
         ("Drink","Drink")))
-    is_breakfast=forms.BooleanField(help_text = 'Breakfast Food?', required=False)
-    is_lunch=forms.BooleanField(help_text = 'Lunch Food?', required=False)
+    is_breakfast=forms.BooleanField(help_text = 'Breakfast Item?', required=False)
+    is_lunch=forms.BooleanField(help_text = 'Lunch Item?', required=False)
     price=forms.DecimalField(help_text="Please enter the price: ", min_value=0,required=True)
     supplier = forms.ModelChoiceField(queryset=UserProfile.objects.filter(supplier_flag__exact=True))
 

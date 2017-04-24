@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Success</title>
-</head>
-<body>
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
 
-<h1>Success!</h1>
+{% block title_block %}
+    Success
+{% endblock %}
 
-
-<div>
-    Thanks for ordering!<br>
-    <a href="{% url 'index' %}">Return to home</a><br>
-</div>
-
-</body>
-</html> 
+{% block body_block %}
+	<h1>Success!</h1>
+	Thanks for ordering!<br>
+{% endblock %}
