@@ -53,7 +53,7 @@ def results(request):
     ).filter(
         name__icontains=searchstring
     ).order_by(
-        '-promotional_flag'
+        '-promo_flag'
     )
 
     # ORDER RESULTS BY PROMO FLAG THEN BY POPULARITY
