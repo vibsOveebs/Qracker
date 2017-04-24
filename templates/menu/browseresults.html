@@ -1,0 +1,31 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Browse Results
+{% endblock %}
+
+{% block body_block %}
+
+	<h1>Browse Results</h1>
+
+	{% if items %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Restaurant</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <th>{{ item.name }}</th>
+            <th>{{ item.price }}</th>
+            <th>{{ item.supplier }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <strong>There are no items that match your criteria.</strong>
+    {% endif %}
+
+{% endblock %}	

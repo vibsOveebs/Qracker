@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, AddItemForm, BrowseForm, SearchForm, BrowseResultsForm
 from menu.forms import AddItemForm, BrowseForm, SearchForm
 from menu.models import Item
 
@@ -66,4 +67,20 @@ def results(request):
 
 def browse(request):
     form = BrowseForm()
-    return render(request, 'menu/browse.html', {'form': form})
+
+    if request.method == 'POST':
+        return browseresults(request)
+    else:
+        return render(request, 'menu/browse.html', {'form': form})
+
+def browseresults(request):
+    restaurant_name = request.POST.get('restaurant_name')
+    is_food = request.POST.get('is_food')
+    is_drink = request.POST.get('is_drink')
+    is_breakfast = request.POST.get('is_breakfast')
+    is_lunch = request.POST.get('is_lunch')
+
+    item_list = Item.objects.filter(supplier=restaurant_name)
+    context_dict = {'items': item_list}
+
+    return render(request, 'menu/browseresults.html', context_dict)
