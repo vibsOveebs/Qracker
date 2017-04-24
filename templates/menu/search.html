@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-    <form id="search_form" method="get" action="/menu/search/">
+    <form id="search_form" method="post" action="/menu/search/">
         {% csrf_token %}
         {% for hidden in form.hidden_fields %}
         {{ hidden }}
