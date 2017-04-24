@@ -32,6 +32,7 @@ class SearchForm(forms.ModelForm):
         model = Item
         fields = ('searchstring', 'food_or_drink', 'is_breakfast', 'is_lunch') 
 
+
 class BrowseForm(forms.Form):
     RESTAURANT_CHOICES = (
         ('Starbucks', 'Starbucks'),
