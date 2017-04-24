@@ -16,9 +16,6 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
-from menu import views
-from orders import views
-from userprofile import views
 from qracker import views
 
 urlpatterns = [

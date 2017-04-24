@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from menu.models import Order
 
 
 def open_orders(request):
