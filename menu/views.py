@@ -25,8 +25,8 @@ def success(request):
 def search(request):
     form = SearchForm()
 
-    if request.method == 'GET':
-        form = SearchForm(request.GET)
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
         if form.is_valid():
             return results(request)
         else:
@@ -38,10 +38,10 @@ def search(request):
 # results view
 def results(request):
     # get search parameters
-    searchstring = request.GET.get('searchstring')
-    food_or_drink = request.GET.get('food_or_drink')
-    is_breakfast = request.GET.get('is_breakfast')
-    is_lunch = request.GET.get('is_lunch')
+    searchstring = request.POST.get('searchstring')
+    food_or_drink = request.POST.get('food_or_drink')
+    is_breakfast = request.POST.get('is_breakfast')
+    is_lunch = request.POST.get('is_lunch')
 
     # filter the Item set using search parameters
     results = Item.objects.filter(
