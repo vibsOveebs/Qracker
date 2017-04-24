@@ -66,10 +66,10 @@ class SearchForm(forms.ModelForm):
 
 class BrowseForm(forms.ModelForm):
     restaurant_name = forms.ModelChoiceField(queryset=User.objects.filter(id = UserProfile.objects.filter(supplier_flag__exact=True).values_list('user_id')), required=True)
-    is_food = forms.BooleanField(initial=False, required=False)
-    is_drink = forms.BooleanField(initial=False, required=False)
-    is_breakfast = forms.BooleanField(initial=False, required=False)
-    is_lunch = forms.BooleanField(initial=False, required=False)
+    is_food = forms.BooleanField(label='Food?', initial=False, required=False)
+    is_drink = forms.BooleanField(label='Drink?', initial=False, required=False)
+    is_breakfast = forms.BooleanField(label='Breakfast?', initial=False, required=False)
+    is_lunch = forms.BooleanField(label='Lunch?', initial=False, required=False)
 
     class Meta:
         model = Item
