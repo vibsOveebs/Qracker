@@ -28,6 +28,7 @@ class SearchForm(forms.ModelForm):
     ))
     is_breakfast = forms.BooleanField(initial=False)
     is_lunch = forms.BooleanField(initial=False)
+
     class Meta:
         model = Item
         fields = ('searchstring', 'food_or_drink', 'is_breakfast', 'is_lunch') 
