@@ -46,11 +46,14 @@ def results(request):
         name__icontains=searchstring
     )
 
+    # ORDER RESULTS BY PROMO FLAG THEN BY POPULARITY
+
+    context_dict = {'results': results}
+
     # render
-    return render(request, 'menu/results.html', results)
+    return render(request, 'menu/results.html', context_dict)
 
 
 def browse(request):
     form = BrowseForm()
     return render(request, 'menu/browse.html', {'form': form})
-

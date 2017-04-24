@@ -6,5 +6,20 @@
 {% endblock %}
 
 {% block body_block %}
-
+    {% if results %}
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Restaurant</th>
+        </tr>
+        {% for item in results %}
+        <tr>{{ item.name }}</tr>
+        <tr>{{ item.price }}</tr>
+        <tr>{{ item.supplier }}</tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <strong>Your search yielded no results, please try again.</strong>
+    {% endif %}
 {% endblock %}
