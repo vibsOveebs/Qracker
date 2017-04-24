@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, AddItemForm, BrowseForm, SearchForm
+from menu.forms import AddItemForm, BrowseForm, SearchForm
 from menu.models import Item
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
@@ -22,38 +22,8 @@ def add_menu_item(request):
 def success(request):
     return render(request, 'menu/success.html')
 
-@user_passes_test(lambda u: Group.objects.get(name='customer') in u.groups.all())
-def add_order_mcdonalds(request):
-    form = McDonaldsOrderForm()
+#@user_passes_test(lambda u: Group.objects.get(name='customer') in u.groups.all())
 
-    # A HTTP POST?
-    if request.method == 'POST':
-        form = additemform(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
-            return success(request)
-        else:
-            print(form.errors)
-
-    return render(request, "menu/add_item.html", {'form': form})
-
-
-def success(request):
-    return render(request, 'menu/success.html')
-
-
-def add_order_tacobell(request):
-    form = TacoBellOrderForm()
-
-    if request.method == 'POST':
-        form = TacoBellOrderForm(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
-            return success(request)
-        else:
-            print(form.errors)
-
-    return render(request, 'menu/add_order_tacobell.html', {'form': form})
 
 # search view
 def search(request):
@@ -77,6 +47,7 @@ def search(request):
                 name__icontains=searchstring
             )
             return render(request, 'menu/results.html', results)
+
 
 def browse(request):
     form = BrowseForm()
