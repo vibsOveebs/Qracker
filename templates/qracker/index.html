@@ -1,3 +1,16 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Qracker
+{% endblock %}
+
+{% block body_block %}
+    <img src="{% static "images/qracker.jpeg" %}" alt="Qracker" style="width:304px;">
+    <h1>Welcome to Qracker!</h1>
+{% endblock %}
+
+<!--
 <!DOCTYPE html>
 
 {% load staticfiles %}
@@ -35,7 +48,7 @@ tr:nth-child(even) {
 
 <div>
     <ul>
-        <li><a href="{% url 'additem' %}">Taco Bell Menu</a></li>
+        <li><a href="{% url 'additem' %}">Add Item to Menu</a></li>
         <li><a href="{% url 'open_orders' %}">Open Orders</a></li>
         <li><a href="{% url 'register' %}">Sign Up</a></li>
         <li><a href="{% url 'browse' %}">Browse</a></li>
@@ -44,3 +57,4 @@ tr:nth-child(even) {
 
 </body>
 </html> 
+-->
