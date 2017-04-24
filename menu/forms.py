@@ -1,6 +1,8 @@
 from django import forms
 from menu.models import Order, Item
 from datetime import datetime
+from userprofile.models import UserProfile
+
 
 class additemform(forms.ModelForm):
     name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
@@ -9,8 +11,9 @@ class additemform(forms.ModelForm):
         ("Drink","Drink")))
     is_breakfast=forms.BooleanField(help_text = 'Breakfast Food?', required=False)
     is_lunch=forms.BooleanField(help_text = 'Lunch Food?', required=False)
-    price=forms.DecimalField(help_text="Please enter the price: ",min_value=0,required=True)
-    
+    price=forms.DecimalField(help_text="Please enter the price: ", min_value=0,required=True)
+    supplier = forms.ModelChoiceField(queryset=UserProfile.objects.filter(supplier_flag__exact=True))
+
     class Meta:
         model = Item
         exclude = ['promo_flag']
