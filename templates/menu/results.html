@@ -7,17 +7,21 @@
 
 {% block body_block %}
     {% if results %}
-    <table>
-        <tr>
-            <th>Item Name</th>
-            <th>Price</th>
-            <th>Restaurant</th>
-        </tr>
-        {% for item in results %}
-        <tr>{{ item.name }}</tr>
-        <tr>{{ item.price }}</tr>
-        <tr>{{ item.supplier }}</tr>
-        {% endfor %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Restaurant</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in results %}
+            <tr>{{ item.name }}</tr>
+            <tr>{{ item.price }}</tr>
+            <tr>{{ item.supplier }}</tr>
+            {% endfor %}
+        </tbody>
     </table>
     {% else %}
     <strong>Your search yielded no results, please try again.</strong>

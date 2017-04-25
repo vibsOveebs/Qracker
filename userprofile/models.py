@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include.
     supplier_flag = models.BooleanField(default=False)
     location = models.CharField(max_length=128)
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(validators=[MaxValueValidator(9999999999)])
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):

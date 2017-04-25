@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from menu.forms import AddItemForm, BrowseForm, SearchForm, BrowseResultsForm
 from menu.models import Item
+
+from qracker.views import index
+
+from orders.forms import TransactionForm
+
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -111,3 +116,16 @@ def browseresults(request):
     context_dict = {'items': item_list}
 
     return render(request, 'menu/browseresults.html', context_dict)
+
+def orderitem(request, itemid):
+
+    if request.method == 'POST':
+        user_id = request.user.id
+        form = TransactionForm(initial={'initiator': user_id, 'item': itemid})
+
+        if form.is_valid():
+            return results(request)
+        else:
+            print(form.errors)
+
+    return index(request)
