@@ -12,7 +12,7 @@ class AddItemForm(forms.ModelForm):
     is_breakfast=forms.BooleanField(help_text = 'Breakfast Item?', required=False)
     is_lunch=forms.BooleanField(help_text = 'Lunch Item?', required=False)
     price=forms.DecimalField(help_text="Please enter the price: ", min_value=0,required=True)
-    supplier = forms.ModelChoiceField(queryset=User.objects.filter(id = UserProfile.objects.filter(supplier_flag__exact=True).values_list('user_id')))
+    supplier = forms.ModelChoiceField(queryset=User.objects.filter(id__in = UserProfile.objects.filter(supplier_flag__exact=True).values_list('user_id')))
 
     class Meta:
         model = Item
@@ -34,7 +34,7 @@ class SearchForm(forms.ModelForm):
         fields = ('searchstring', 'food_or_drink', 'is_breakfast', 'is_lunch') 
 
 class BrowseForm(forms.ModelForm):
-    restaurant_name = forms.ModelChoiceField(queryset=User.objects.filter(id = UserProfile.objects.filter(supplier_flag__exact=True).values_list('user_id')), required=True)
+    restaurant_name = forms.ModelChoiceField(queryset=User.objects.filter(id__in = UserProfile.objects.filter(supplier_flag__exact=True).values_list('user_id')), required=True)
     is_food = forms.BooleanField(label='Food?', initial=False, required=False)
     is_drink = forms.BooleanField(label='Drink?', initial=False, required=False)
     is_breakfast = forms.BooleanField(label='Breakfast?', initial=False, required=False)

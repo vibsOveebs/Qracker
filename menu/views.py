@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from menu.forms import McDonaldsOrderForm, TacoBellOrderForm, AddItemForm, BrowseForm, SearchForm, BrowseResultsForm
-from menu.forms import AddItemForm, BrowseForm, SearchForm
+from menu.forms import AddItemForm, BrowseForm, SearchForm, BrowseResultsForm
 from menu.models import Item
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
