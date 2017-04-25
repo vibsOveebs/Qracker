@@ -8,6 +8,11 @@ from menu.models import Item
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from random import randint
+
+
+def generate_code():
+    return randint(0,9999)
 
 class Transaction(models.Model):
     # Transactions entity
@@ -18,11 +23,11 @@ class Transaction(models.Model):
     item = models.ForeignKey(Item)
     quantity = models.IntegerField()
 
-    code_word = models.CharField(max_length=32)
+    code = models.IntegerField(default=generate_code)
 
     # Initiates and Delivers relationships
     initiates = models.ForeignKey(User, related_name='initiates')
-    delivers = models.ForeignKey(User, related_name='delivers')
+    delivers = models.ForeignKey(User, related_name='delivers', blank=True, null=True)
 
     # Feedback entity
     timeliness = models.IntegerField(

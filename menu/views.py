@@ -4,7 +4,7 @@ from menu.models import Item
 
 from qracker.views import index
 
-from orders.forms import TransactionForm
+from orders.forms import InitiateForm
 
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
@@ -118,14 +118,15 @@ def browseresults(request):
     return render(request, 'menu/browseresults.html', context_dict)
 
 def orderitem(request, itemid):
+    form = InitiateForm();
 
     if request.method == 'POST':
-        user_id = request.user.id
-        form = TransactionForm(initial={'initiator': user_id, 'item': itemid})
+        form = InitiateForm(initial={'initiator': User.objects.filter(user_id__exact=request.User.id), 'item': Item.objects.filter(item_id__exact=itemid)})
 
         if form.is_valid():
-            return results(request)
+            form.save(commit=True)
+            return success(request)
         else:
             print(form.errors)
 
-    return index(request)
+    return render(request, 'menu/orderitem.html', {'form': form})

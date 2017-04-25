@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^search', views.search, name='search'),
     url(r'^browse', views.browse, name='browse'),
     url(r'^browseresults', views.browseresults, name='browseresults'),
-    url(r'^orderitem/([0-9]+)', views.orderitem, name='orderitem')
+    url(r'^orderitem/([0-9]*)', views.orderitem, name='orderitem')
 ]
