@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
+	<br>
 	<h1>Register for Qracker</h1>
 	{% if registered %}
 		<strong>Thank you for registering!</strong>
@@ -19,7 +20,7 @@
 			{{ profile_form.as_p }}
 
 			<!-- Provide a button to click to submit the form. -->
-			<input type="submit" name="submit" value="Register" />
+			<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" />Register</button>
 		</form>
 	{% endif %}
 {% endblock %}
