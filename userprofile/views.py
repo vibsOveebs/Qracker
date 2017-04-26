@@ -103,6 +103,7 @@ def user_login(request):
     else:
         return render(request, 'userprofile/login.html', {})
 
+
 # logout view
 @login_required
 def user_logout(request):
