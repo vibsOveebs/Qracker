@@ -1,25 +1,25 @@
 from __future__ import unicode_literals
-
-from django.db import models
-
-from django.contrib.auth.models import User
-
-from menu.models import Item
-
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.contrib.auth.models import User
+from django.db import models
+from menu.models import Item
 from random import randint
 
 
+# random code generator
 def generate_code():
     return randint(0,9999)
 
+
+# Transaction Model
 class Transaction(models.Model):
+
     # Transactions entity
     creation_time = models.DateTimeField()
     delivery_time = models.DateTimeField(blank=True, null=True)
     pickup_loc = models.CharField(max_length=64)
 
+    # item in transaction fields
     item = models.ForeignKey(Item)
     quantity = models.IntegerField()
 
