@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from userprofile.forms import UserForm, UserProfileForm
+from userprofile.models import UserProfile
 
 
 # registration view
@@ -118,4 +119,17 @@ def user_logout(request):
 # view profile view
 @login_required
 def view_current_profile(request):
-    return render(request, 'userprofile/viewprofile.html')
+
+    # get user information
+    user = request.user
+    userid = request.user.id
+    userprofile = UserProfile.objects.get(
+        user_id=userid
+    )
+
+    # pass to context dict
+    context_dict = {'user' : user ,
+                    'userprofile' : userprofile}
+
+    # render
+    return render(request, 'userprofile/viewprofile.html', context_dict)
