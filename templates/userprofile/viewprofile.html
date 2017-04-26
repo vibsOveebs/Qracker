@@ -1,9 +1,28 @@
 {% extends "qracker/base.html" %}
 
 {% block title_block %}
-	View Profile
+	View Your Profile
 {% endblock %}
 
 {% block body_block %}
-
+	<table class="table table-bordered table-striped">
+		<tbody>
+		<tr>
+			<th>Username</th>
+			<th>{{ user.username }}</th>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<th>{{ user.email }}</th>
+		</tr>
+		<tr>
+			<th>Phone Number</th>
+			<th>{{userprofile.phone_number}}</th>
+		</tr>
+		<tr>
+			<th>Location</th>
+			<th>{{userprofile.location}}</th>
+		</tr>
+		</tbody>
+	</table>
 {% endblock %}
