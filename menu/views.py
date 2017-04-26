@@ -1,9 +1,9 @@
+from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render
 from menu.forms import AddItemForm, BrowseForm, SearchForm
 from menu.models import Item
 from orders.forms import PartialInitiateForm
-from django.contrib.auth.models import User
-from django.db.models import Q
 
 
 # add item view
