@@ -38,3 +38,8 @@ class InitiateForm(forms.ModelForm):
     class Meta:
         model = Transaction
         fields = ('creation_time', 'pickup_loc', 'item', 'quantity', 'code', 'initiates')
+
+class showorderform(forms.ModelForm):
+    class Meta:
+        model=Transaction
+        fields=('quantity','item')
