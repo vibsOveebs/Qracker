@@ -1,13 +1,17 @@
 from __future__ import unicode_literals
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
+# Item Model
 class Item(models.Model):
+
+    # enumerate food or drink choice
     FOOD_OR_DRINK_CHOICES = (
         ('Food', 'Food'),
         ('Drink', 'Drink')
     )
+
     name = models.CharField(max_length=100)
     food_or_drink = models.CharField(max_length=5, choices=FOOD_OR_DRINK_CHOICES)
     is_breakfast = models.BooleanField(default=False)
