@@ -32,7 +32,9 @@
                 <th>{{ transaction.pickup_loc }}</th>
                 <th>{{ transaction.creation_time }}</th>
                 <th>
-                    <button class="btn btn-primary" type="submit">Pickup</button>
+                    <form role="form" id="pickup_item" method="get" action="/orders/pickupitem/">
+                        <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Pickup</button>
+                    </form>
                 </th>
             </tr>
             {% endfor %}
