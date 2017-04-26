@@ -4,7 +4,7 @@ from menu.models import Item
 
 from qracker.views import index
 
-from orders.forms import InitiateForm, PartialInitiateForm
+from orders.forms import PartialInitiateForm
 from orders.models import Transaction
 
 from django.contrib.auth.decorators import user_passes_test

@@ -1,0 +1,45 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Open Orders
+{% endblock %}
+
+{% block body_block %}
+    <br>
+	<h1>Open Orders</h1>
+
+	{% if transactions %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Restaurant</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Delivery Location</th>
+                <th>Order Time</th>
+                <th>Pickup?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <th>{{ transaction.item.supplier }}</th>
+                <th>{{ transaction.item.name }}</th>
+                <th>{{ transaction.item.price }}</th>
+                <th>{{ transaction.quantity }}</th>
+                <th>{{ transaction.pickup_loc }}</th>
+                <th>{{ transaction.creation_time }}</th>
+                <th>
+                    <button class="btn btn-primary" type="submit">Pickup</button>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <strong>There are no currently open orders.</strong>
+    {% endif %}
+
+{% endblock %}
