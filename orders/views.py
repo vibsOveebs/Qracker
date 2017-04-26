@@ -7,9 +7,9 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-from datetime import datetime
-
 from menu.views import success
+
+from datetime import datetime
 
 def openrequests(request):
     context_dict = {}
@@ -27,7 +27,10 @@ def pickupitem(request):
         print(transaction)
         transaction.delivers = request.user
         transaction.save()
-        return success(request)
+        return pickupsuccess(request)
+
+def pickupsuccess(request):
+    return render(request, 'orders/pickupsuccess.html')
 
 def orderitem(request):
     form = PartialInitiateForm();
