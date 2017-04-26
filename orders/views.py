@@ -10,7 +10,7 @@ from django.db.models import Q
 def openrequests(request):
     context_dict = {}
 
-    transactions = Transaction.objects.filter(delivery_time__isnull=True)
+    transactions = Transaction.objects.filter(delivers__isnull=True)
     context_dict['transactions'] = transactions
 
     return render(request, "orders/openrequests.html", context_dict)

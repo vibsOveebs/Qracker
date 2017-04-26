@@ -2,12 +2,12 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	Open Orders
+	Open Requests
 {% endblock %}
 
 {% block body_block %}
     <br>
-	<h1>Open Orders</h1>
+	<h1>Open Requests</h1>
 
 	{% if transactions %}
     <table class="table table-bordered table-striped">
@@ -39,7 +39,7 @@
         </tbody>
     </table>
     {% else %}
-    <strong>There are no currently open orders.</strong>
+    <strong>There are no currently open requests.</strong>
     {% endif %}
 
 {% endblock %}
