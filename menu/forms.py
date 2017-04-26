@@ -1,9 +1,10 @@
 from django import forms
-from menu.models import Item
-from datetime import datetime
-from userprofile.models import UserProfile
 from django.contrib.auth.models import User
+from menu.models import Item
+from userprofile.models import UserProfile
 
+
+# Add Item Form
 class AddItemForm(forms.ModelForm):
     name=forms.CharField(help_text="Please enter the Item name: ",max_length=128,required=True)
     food_or_drink=forms.ChoiceField(choices=(
@@ -19,7 +20,7 @@ class AddItemForm(forms.ModelForm):
         exclude = ['promo_flag']
 
 
-# search form
+# Search Form
 class SearchForm(forms.ModelForm):
     searchstring = forms.CharField(help_text= 'Item Name: ', max_length=128, required=False)
     food_or_drink = forms.ChoiceField(help_text='Select if Food or Drink',choices=(
@@ -33,6 +34,8 @@ class SearchForm(forms.ModelForm):
         model = Item
         fields = ('searchstring', 'food_or_drink', 'is_breakfast', 'is_lunch') 
 
+
+# Browse Form
 class BrowseForm(forms.ModelForm):
     restaurant_name = forms.ModelChoiceField(queryset=User.objects.filter(id__in = UserProfile.objects.filter(supplier_flag__exact=True).values_list('user_id')), required=True)
     is_food = forms.BooleanField(label='Food?', initial=False, required=False)
@@ -44,6 +47,8 @@ class BrowseForm(forms.ModelForm):
         model = Item
         fields = ('restaurant_name', 'is_breakfast', 'is_lunch')
 
+
+# Browse Results Form
 class BrowseResultsForm(forms.ModelForm):
     class Meta:
         model = Item
