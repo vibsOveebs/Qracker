@@ -42,7 +42,7 @@ class Transaction(models.Model):
     text_feedback = models.CharField(blank=True, null=True, max_length=140)
 
     def __str__(self):
-        return id
+        return str(self.id)
 
     def __unicode__(self):
-        return id
+        return str(self.id)
