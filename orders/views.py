@@ -32,20 +32,14 @@ def pickupitem(request):
 def pickupsuccess(request):
     return render(request, 'orders/pickupsuccess.html')
 
-def orderitem(request):
-    form = PartialInitiateForm();
+def myrequests(request):
+    context_dict = {}
     userid = request.user.id
 
-    if request.method == 'GET':
-        itemid = request.GET['itemid']
-    elif request.method == 'POST':
-        itemid = request.POST.get('itemid')
-        form = PartialInitiateForm(request.POST)
-        transaction = form.save(commit=False)
-        transaction.initiates = User.objects.get(id=userid)
-        transaction.item = Item.objects.get(id=itemid)
-        transaction.save()
-        print(form.errors)
-        return success(request)
+    transactions = Transaction.objects.filter(initiates__exact=userid).filter(delivery_time__isnull=True)
+    context_dict['transactions'] = transactions
 
-    return render(request, 'menu/orderitem.html', {'form': form, 'itemid' : itemid})
+    return render(request, "orders/myrequests.html", context_dict)
+
+def mydeliver(request):
+    return pickupsuccess(request)

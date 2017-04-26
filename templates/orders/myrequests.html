@@ -1,0 +1,54 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	My Requests
+{% endblock %}
+
+{% block body_block %}
+    <br>
+	<h1>My Requests</h1>
+
+	{% if transactions %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Restaurant</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Delivery Location</th>
+                <th>Order Time</th>
+                <th>Deliverer</th>
+                <th>Exchange?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <th>{{ transaction.item.supplier }}</th>
+                <th>{{ transaction.item.name }}</th>
+                <th>{{ transaction.item.price }}</th>
+                <th>{{ transaction.quantity }}</th>
+                <th>{{ transaction.pickup_loc }}</th>
+                <th>{{ transaction.creation_time }}</th>
+                {% if transaction.delivers %}
+                <th>{{ transaction.delivers }}</th>
+                <th>
+                    <form role="form" id="pickup_item" method="get" action="/orders/pickupitem/">
+                        <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange</button>
+                    </form>
+                </th>
+                {% else %}
+                <th>Searching...</th>
+                <th>N/A</th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <strong>There are no currently open requests.</strong>
+    {% endif %}
+
+{% endblock %}
