@@ -1,14 +1,16 @@
 from __future__ import unicode_literals
-from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 
 
+# User Profile model
 class UserProfile(models.Model):
-    # This line is required. Links UserProfile to a User model instance.
+
+    # link user profile to a user
     user = models.OneToOneField(User)
 
-    # The additional attributes we wish to include.
+    # profile fields
     supplier_flag = models.BooleanField(default=False)
     location = models.CharField(max_length=128)
     phone_number = models.IntegerField(validators=[MaxValueValidator(9999999999)])
@@ -21,7 +23,9 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+# Payment Model
 class Payment(models.Model):
+
     # Links Payment to User
     user = models.OneToOneField(User)
 
@@ -41,6 +45,8 @@ class Payment(models.Model):
     def __unicode__(self):
         return self.user.username
 
+
+# Levels model
 class Levels(models.Model):
     number_transactions = models.IntegerField()
     level = models.IntegerField(
