@@ -169,7 +169,7 @@ def browseresults(request):
 # order item view
 def orderitem(request):
     # get form and currently logged in user
-    form = PartialInitiateForm();
+    form = PartialInitiateForm()
     userid = request.user.id
 
     # if get, pull item id from request
