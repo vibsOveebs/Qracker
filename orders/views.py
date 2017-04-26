@@ -21,9 +21,15 @@ def openrequests(request):
 
 # Pickup item button view
 def pickupitem(request):
+
+    # if button pressed
     if request.method == 'GET':
+
+        # get transaction id and transaction
         transactionid = request.GET['transactionid']
         transaction = Transaction.objects.get(id=transactionid)
+
+        # set deliverer in transaction
         transaction.delivers = request.user
 
         # save the form in the database
