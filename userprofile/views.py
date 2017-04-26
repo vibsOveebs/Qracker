@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from userprofile.forms import UserForm, UserProfileForm
-from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -97,8 +97,16 @@ def user_login(request):
     else:
         return render(request, 'userprofile/login.html', {})
 
+# logout view
 @login_required
 def user_logout(request):
     logout(request)
+
     # Take the user back to the hompage
     return render(request, 'userprofile/logout.html')
+
+
+# view profile view
+@login_required
+def view_current_profile(request):
+    return render(request, 'userprofile/viewprofile.html')
