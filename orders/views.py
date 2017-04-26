@@ -21,19 +21,9 @@ def openrequests(request):
 
 # Pickup item button view
 def pickupitem(request):
-
-    # if pickup item has been submitted
     if request.method == 'GET':
-
-        # get transaction id and print it
         transactionid = request.GET['transactionid']
-        print(transactionid)
-
-        # get transaction and print it
         transaction = Transaction.objects.get(id=transactionid)
-        print(transaction)
-
-        # set delivers to the current user
         transaction.delivers = request.user
 
         # save the form in the database
@@ -84,3 +74,13 @@ def mydeliveries(request):
 
     # render
     return render(request, "orders/mydeliveries.html", context_dict)
+
+def recipientexchange(request):
+    if request.method == 'GET':
+        context_dict = {}
+        transactionid = request.GET['transactionid']
+        transaction = Transaction.objects.get(id=transactionid)
+        context_dict['transactions'] = transaction
+        return render(request, "orders/recipientexchange.html", context_dict)
+
+

@@ -1,0 +1,17 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Recipient Exchange
+{% endblock %}
+
+{% block body_block %}
+    <br>
+	<h1>Your code:</h1>
+    {% if transactions %}
+        <h1>{{ transactions.code }}</h1>
+    {% else%}
+        <h1>Error</h1>
+    {% endif %}
+    <p>Please give this code to the person delivering your item.</p>
+{% endblock %}

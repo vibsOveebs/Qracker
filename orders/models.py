@@ -19,8 +19,7 @@ class Transaction(models.Model):
     delivery_time = models.DateTimeField(blank=True, null=True)
     pickup_loc = models.CharField(max_length=64)
 
-    # item in transaction fields
-    item = models.ForeignKey(Item)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
     code = models.IntegerField(default=generate_code)

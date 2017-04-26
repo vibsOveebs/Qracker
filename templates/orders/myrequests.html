@@ -35,7 +35,7 @@
                 {% if transaction.delivers %}
                 <th>{{ transaction.delivers }}</th>
                 <th>
-                    <form role="form" id="pickup_item" method="get" action="/orders/pickupitem/">
+                    <form role="form" id="recipeint_exchange" method="get" action="/orders/recipientexchange/">
                         <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange</button>
                     </form>
                 </th>
