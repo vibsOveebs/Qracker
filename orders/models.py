@@ -17,7 +17,7 @@ def generate_code():
 class Transaction(models.Model):
     # Transactions entity
     creation_time = models.DateTimeField()
-    delivery_time = models.DateTimeField()
+    delivery_time = models.DateTimeField(blank=True, null=True)
     pickup_loc = models.CharField(max_length=64)
 
     item = models.ForeignKey(Item)
@@ -30,16 +30,16 @@ class Transaction(models.Model):
     delivers = models.ForeignKey(User, related_name='delivers', blank=True, null=True)
 
     # Feedback entity
-    timeliness = models.IntegerField(
+    timeliness = models.IntegerField(blank=True, null=True,
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
-    friendliness = models.IntegerField(
+    friendliness = models.IntegerField(blank=True, null=True,
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
-    responsetime = models.IntegerField(
+    responsetime = models.IntegerField(blank=True, null=True,
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
-    text_feedback = models.CharField(max_length=140)
+    text_feedback = models.CharField(blank=True, null=True, max_length=140)
 
     def __str__(self):
         return id

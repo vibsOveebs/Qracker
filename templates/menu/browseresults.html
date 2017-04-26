@@ -32,9 +32,9 @@
                 <th>{{ item.is_breakfast }}</th>
                 <th>{{ item.is_lunch }}</th>
                 <th>
-                    <form role="form" id="order_item" method="get" action="/menu/orderitem/{{ item.id }}/">
+                    <form role="form" id="order_item" method="get" action="/menu/orderitem/">
                         <!--{% csrf_token %}-->
-                        <button class="btn btn-primary" type="submit" name="submit">Order</button>
+                        <button class="btn btn-primary" type="submit" name="itemid" value="{{ item.id }}">Order</button>
                     </form>
                 </th>
             </tr>
