@@ -22,9 +22,7 @@ def openrequests(request):
 def pickupitem(request):
     if request.method == 'GET':
         transactionid = request.GET['transactionid']
-        print(transactionid)
         transaction = Transaction.objects.get(id=transactionid)
-        print(transaction)
         transaction.delivers = request.user
         transaction.save()
         return pickupsuccess(request)
@@ -49,3 +47,13 @@ def mydeliveries(request):
     context_dict['transactions'] = transactions
 
     return render(request, "orders/mydeliveries.html", context_dict)
+
+def recipientexchange(request):
+    if request.method == 'GET':
+        context_dict = {}
+        transactionid = request.GET['transactionid']
+        transaction = Transaction.objects.get(id=transactionid)
+        context_dict['transactions'] = transaction
+        return render(request, "orders/recipientexchange.html", context_dict)
+
+
