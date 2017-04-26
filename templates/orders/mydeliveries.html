@@ -2,12 +2,12 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	My Requests
+	My Deliveries
 {% endblock %}
 
 {% block body_block %}
     <br>
-	<h1>My Requests</h1>
+	<h1>My Deliveries</h1>
 
 	{% if transactions %}
     <table class="table table-bordered table-striped">
@@ -19,7 +19,7 @@
                 <th>Quantity</th>
                 <th>Delivery Location</th>
                 <th>Order Time</th>
-                <th>Deliverer</th>
+                <th>Requester</th>
                 <th>Exchange?</th>
             </tr>
         </thead>
@@ -32,23 +32,18 @@
                 <th>{{ transaction.quantity }}</th>
                 <th>{{ transaction.pickup_loc }}</th>
                 <th>{{ transaction.creation_time }}</th>
-                {% if transaction.delivers %}
-                <th>{{ transaction.delivers }}</th>
+                <th>{{ transaction.initiates }}</th>
                 <th>
                     <form role="form" id="pickup_item" method="get" action="/orders/pickupitem/">
                         <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange</button>
                     </form>
                 </th>
-                {% else %}
-                <th>Searching...</th>
-                <th>N/A</th>
-                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-    <strong>You do not have any currently open requests.</strong>
+    <strong>You do not have any items to deliver.</strong>
     {% endif %}
 
 {% endblock %}

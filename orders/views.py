@@ -41,5 +41,11 @@ def myrequests(request):
 
     return render(request, "orders/myrequests.html", context_dict)
 
-def mydeliver(request):
-    return pickupsuccess(request)
+def mydeliveries(request):
+    context_dict = {}
+    userid = request.user.id
+
+    transactions = Transaction.objects.filter(delivers__exact=userid).filter(delivery_time__isnull=True)
+    context_dict['transactions'] = transactions
+
+    return render(request, "orders/mydeliveries.html", context_dict)
