@@ -7,10 +7,10 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-def openorders(request):
+def openrequests(request):
     context_dict = {}
 
     transactions = Transaction.objects.filter(delivery_time__isnull=True)
     context_dict['transactions'] = transactions
 
-    return render(request, "orders/openorders.html", context_dict)
+    return render(request, "orders/openrequests.html", context_dict)
