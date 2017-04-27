@@ -34,7 +34,7 @@
                 <th>{{ transaction.creation_time }}</th>
                 <th>{{ transaction.initiates }}</th>
                 <th>
-                    <form role="form" id="pickup_item" method="get" action="/orders/pickupitem/">
+                    <form role="form" id="deliverer_exchange" method="get" action="/orders/delivererexchange/">
                         <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange</button>
                     </form>
                 </th>
