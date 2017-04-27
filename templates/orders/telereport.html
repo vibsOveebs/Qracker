@@ -7,7 +7,7 @@
 
 {% block body_block %}
     <br>
-	<h1>My order report</h1>
+	<h1>Telemarketer Report</h1>
 
 	{% if transactions %}
     <table class="table table-bordered table-striped">
@@ -19,6 +19,7 @@
                 <th>Quantity</th>
                 <th>Delivery Location</th>
                 <th>Order Time</th>
+                <th>Requester</th>
                 <th>Deliverer</th>
                 <th>Feedback Avg</th>
             </tr>
@@ -32,7 +33,14 @@
                 <th>{{ transaction.quantity }}</th>
                 <th>{{ transaction.pickup_loc }}</th>
                 <th>{{ transaction.creation_time }}</th>
-                <th>{{ transaction.delivers }}</th>
+                <th>{{ transaction.initiates }}
+                    <br>
+                    {{ transaction.initiates.userprofile.phone_number }}
+                </th>
+                <th>{{ transaction.delivers }}
+                    <br>
+                    {{ transaction.delivers.userprofile.phone_number }}
+                </th>
                 <th><p id="avg{{ transaction.id }}"></p></th>
                 <script>
                 var timeliness = {{ transaction.timeliness}};
