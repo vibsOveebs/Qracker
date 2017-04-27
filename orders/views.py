@@ -99,9 +99,6 @@ def recipientexchange(request):
         context_dict['transactions'] = transaction
         return render(request, "orders/recipientexchange.html", context_dict)
 
-<<<<<<< HEAD
-def telereport(request):
-=======
     elif request.method == 'POST':
         transactionid = request.POST.get('transactionid')
         code = request.POST.get('code')
@@ -120,6 +117,7 @@ def telereport(request):
             transaction.delivery_time = datetime.now()
             transaction.save()
             # return success
+
             return HttpResponse("Exchange successful")
         else :
             # Wrong code message
@@ -127,15 +125,15 @@ def telereport(request):
     else:
         # Error
         return HttpResponse("Error")
->>>>>>> origin/master
+
+def telereport(request):
 
     context_dict={}
     userid = request.user.id
 
-    # find transactions that matches that userid
+    # find transactions that have been completed
     transactions = Transaction.objects.filter(
-        initiates__exact=userid).filter(
-        delivery_time__isnull=True)
+        delivery_time__isnull=False)
 
     context_dict['transactions'] = transactions
     # render

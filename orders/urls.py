@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^pickupitem', views.pickupitem, name='pickupitem'),
     url(r'^delivererexchange', views.delivererexchange, name='delivererexchange'),
     url(r'^recipientexchange', views.recipientexchange, name='recipientexchange'),
+    url(r'^telereport', views.telereport, name='telereport'),
 ]
