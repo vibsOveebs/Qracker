@@ -1,0 +1,49 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Report
+{% endblock %}
+
+{% block body_block %}
+    <br>
+	<h1>My order report</h1>
+
+	{% if transactions %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Restaurant</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Delivery Location</th>
+                <th>Order Time</th>
+                <th>Deliverer</th>
+                <th>timeliness</th>
+                <th>friendliness</th>
+                <th>responsetime</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <th>{{ transaction.item.supplier }}</th>
+                <th>{{ transaction.item.name }}</th>
+                <th>{{ transaction.item.price }}</th>
+                <th>{{ transaction.quantity }}</th>
+                <th>{{ transaction.pickup_loc }}</th>
+                <th>{{ transaction.creation_time }}</th>
+                <th>{{ transaction.delivers }}</th>
+                <th>{{ transaction.timeliness}}</th>
+                <th>{{ transaction.friendliness}}</th>
+                <th>{{ transaction.responsetime}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <strong>You do not have any transaction history.</strong>
+    {% endif %}
+
+{% endblock %}

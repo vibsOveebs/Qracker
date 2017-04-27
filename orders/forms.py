@@ -43,3 +43,4 @@ class OpenOrdersForm(forms.ModelForm):
     class Meta:
         model=Transaction
         fields=('creation_time', 'pickup_loc', 'item', 'quantity')
+

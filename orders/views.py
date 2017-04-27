@@ -89,4 +89,16 @@ def recipientexchange(request):
         context_dict['transactions'] = transaction
         return render(request, "orders/recipientexchange.html", context_dict)
 
+def telereport(request):
 
+    context_dict={}
+    userid = request.user.id
+
+    # find transactions that matches that userid
+    transactions = Transaction.objects.filter(
+        initiates__exact=userid).filter(
+        delivery_time__isnull=True)
+
+    context_dict['transactions'] = transactions
+    # render
+    return render(request, "orders/telereport.html", context_dict)
