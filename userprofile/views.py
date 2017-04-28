@@ -7,6 +7,7 @@ from django.shortcuts import render
 from userprofile.forms import UserForm, UserProfileForm, PaymentForm
 from userprofile.models import UserProfile, Payment
 from django.core.exceptions import ObjectDoesNotExist
+from orders.models import Transaction
 
 
 # registration view
@@ -140,10 +141,20 @@ def view_current_profile(request):
     except ObjectDoesNotExist:
         payment = None
 
+    requests = Transaction.objects.filter(
+        initiates__exact=userid).filter(
+        delivery_time__isnull=False)
+
+    deliveries = Transaction.objects.filter(
+        delivers=userid).filter(
+        delivery_time__isnull=False)
+
     # pass to context dict
     context_dict = {'user' : user ,
                     'userprofile' : userprofile,
-                    'payment' : payment}
+                    'payment' : payment,
+                    'requests' : requests,
+                    'deliveries' : deliveries}
 
     # render
     return render(request, 'userprofile/viewprofile.html', context_dict)

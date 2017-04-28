@@ -31,7 +31,7 @@
 		</th>
 		</tbody>
 	</table>
-	
+
 	{% if payment %}
 	<h1>Payment Information</h1>
 	<table class="table table-bordered table-striped">
@@ -54,5 +54,81 @@
 
 	<form role="form" id="add_funds" method="get" action="/userprofile/addfunds/">
         <button class="btn btn-primary" type="submit">Add funds</button>
+    </form>
+
+    <br>
+	<h1>Completed Requests</h1>
+	{% if requests %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Restaurant</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Tip</th>
+                <th>Quantity</th>
+                <th>Pickup Location</th>
+                <th>Order Time</th>
+                <th>Completed Time</th>         
+                <th>Deliverer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+            <tr>
+                <th>{{ request.item.supplier }}</th>
+                <th>{{ request.item.name }}</th>
+                <th>{{ request.item.price }}</th>
+                <th>{{ request.tip }}</th>
+                <th>{{ request.quantity }}</th>
+                <th>{{ request.pickup_loc }}</th>
+                <th>{{ request.creation_time }}</th>
+                <th>{{ request.delivery_time }}
+                <th>{{ request.delivers }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <strong>You have not completed any requests.</strong>
+    {% endif %}
+
+    <br>
+	<h1>Completed Deliveries</h1>
+	{% if deliveries %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Restaurant</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Tip</th>
+                <th>Quantity</th>
+                <th>Delivery Location</th>
+                <th>Order Time</th>
+                <th>Completed Time</th>         
+                <th>Requester</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for delivery in deliveries %}
+            <tr>
+                <th>{{ delivery.item.supplier }}</th>
+                <th>{{ delivery.item.name }}</th>
+                <th>{{ delivery.item.price }}</th>
+                <th>{{ delivery.tip }}</th>
+                <th>{{ delivery.quantity }}</th>
+                <th>{{ delivery.pickup_loc }}</th>
+                <th>{{ delivery.creation_time }}</th>
+                <th>{{ delivery.delivery_time }}
+                <th>{{ delivery.initiates }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <strong>You have not completed any deliveries.</strong>
+    {% endif %}
+
     </form>
 {% endblock %}
