@@ -13,6 +13,12 @@
 			<th>Username</th>
 			<th>{{ user.username }}</th>
 		</tr>
+		{% if userprofile.picture %}
+		<tr>
+			<th>Picture</th>
+			<th><img src="{{ MEDIA_URL}}{{ userprofile.picture }}" style="width:25%"/></th>
+		</tr>
+		{% endif %}
 		<tr>
 			<th>Email</th>
 			<th>{{ user.email }}</th>
