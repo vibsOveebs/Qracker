@@ -27,32 +27,33 @@
         <tbody>
             {% for transaction in transactions %}
             <tr>
-                <th>{{ transaction.item.supplier }}</th>
-                <th>{{ transaction.item.name }}</th>
-                <th>{{ transaction.item.price }}</th>
-                <th>{{ transaction.quantity }}</th>
-                <th>{{ transaction.pickup_loc }}</th>
-                <th>{{ transaction.creation_time }}</th>
-                <th>{{ transaction.tip }}</th>
+                <td>{{ transaction.item.supplier }}</td>
+                <td>{{ transaction.item.name }}</td>
+                <td>{{ transaction.item.price }}</td>
+                <td>{{ transaction.quantity }}</td>
+                <td>{{ transaction.pickup_loc }}</td>
+                <td>{{ transaction.creation_time }}</td>
+                <td>{{ transaction.tip }}</td>
 
                 {% if transaction.delivers %}
-                <th>
+                <td>
                     <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
                         <button class="btn btn-primary" type="submit" name="username" value="{{ transaction.delivers }}">
                         {{ transaction.delivers }}
                         </button>
                     </form>
-                </th>
-                <th>
+                </td>
+                <td>
                     <form role="form" id="recipeint_exchange" method="get" action="/orders/recipientexchange/">
-                        <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange</button>
+                        <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange
+                        </button>
                     </form>
-                </th>
+                </td>
                 {% else %}
-                <th>Searching...</th>
-                <th>N/A</th>
+                <td>Searching...</td>
+                <td>N/A</td>
                 {% endif %}
-                
+
             </tr>
             {% endfor %}
         </tbody>

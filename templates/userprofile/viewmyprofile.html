@@ -86,21 +86,21 @@
         <tbody>
             {% for request in requests %}
             <tr>
-                <th>{{ request.item.supplier }}</th>
-                <th>{{ request.item.name }}</th>
-                <th>{{ request.item.price }}</th>
-                <th>{{ request.tip }}</th>
-                <th>{{ request.quantity }}</th>
-                <th>{{ request.pickup_loc }}</th>
-                <th>{{ request.creation_time }}</th>
-                <th>{{ request.delivery_time }}</th>
-                <th>
+                <td>{{ request.item.supplier }}</td>
+                <td>{{ request.item.name }}</td>
+                <td>{{ request.item.price }}</td>
+                <td>{{ request.tip }}</td>
+                <td>{{ request.quantity }}</td>
+                <td>{{ request.pickup_loc }}</td>
+                <td>{{ request.creation_time }}</td>
+                <td>{{ request.delivery_time }}</td>
+                <td>
 	                <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
 	                    <button class="btn btn-primary" type="submit" name="username" value="{{ request.delivers }}">
 	                    {{ request.delivers }}
 	                    </button>
 	                </form>
-                </th>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -129,21 +129,21 @@
         <tbody>
             {% for delivery in deliveries %}
             <tr>
-                <th>{{ delivery.item.supplier }}</th>
-                <th>{{ delivery.item.name }}</th>
-                <th>{{ delivery.item.price }}</th>
-                <th>{{ delivery.tip }}</th>
-                <th>{{ delivery.quantity }}</th>
-                <th>{{ delivery.pickup_loc }}</th>
-                <th>{{ delivery.creation_time }}</th>
-                <th>{{ delivery.delivery_time }}</th>
-                <th>
+                <td>{{ delivery.item.supplier }}</td>
+                <td>{{ delivery.item.name }}</td>
+                <td>{{ delivery.item.price }}</td>
+                <td>{{ delivery.tip }}</td>
+                <td>{{ delivery.quantity }}</td>
+                <td>{{ delivery.pickup_loc }}</td>
+                <td>{{ delivery.creation_time }}</td>
+                <td>{{ delivery.delivery_time }}</td>
+                <td>
 	                <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
 	                    <button class="btn btn-primary" type="submit" name="username" value="{{ delivery.initiates }}">
 	                    {{ delivery.initiates }}
 	                    </button>
 	                </form>
-                </th>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

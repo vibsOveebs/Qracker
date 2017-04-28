@@ -37,10 +37,10 @@ tr:nth-child(even) {
         </tr>
         {% for order in orders %}
         <tr>
-            <th>{{ order.creation_time }}</th>
-            <th>{{ order.user_name }}</th>
-            <th>{{ order.item_name }}</th>
-            <th>{{ order.restaurant_name }}</th>
+            <td>{{ order.creation_time }}</td>
+            <td>{{ order.user_name }}</td>
+            <td>{{ order.item_name }}</td>
+            <td>{{ order.restaurant_name }}</td>
         </tr>
         {% endfor %}
     </table>
