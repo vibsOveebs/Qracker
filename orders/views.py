@@ -49,42 +49,25 @@ def pickupsuccess(request):
     return render(request, 'orders/pickupsuccess.html')
 
 
-# My Requests view
-def myrequests(request):
-
+def myorders(request):
     # initialize context dictionary and grab userid
     context_dict = {}
     userid = request.user.id
 
-    # find transactions that matches that userid
-    transactions = Transaction.objects.filter(
+    # find requests that matches that userid
+    requests = Transaction.objects.filter(
         initiates__exact=userid).filter(
         delivery_time__isnull=True)
+    context_dict['requests'] = requests
 
-    # put transactions into the context dictionary
-    context_dict['transactions'] = transactions
-
-    #render
-    return render(request, "orders/myrequests.html", context_dict)
-
-
-# My Deliveries view
-def mydeliveries(request):
-
-    # initialize context dictionary and grab userid
-    context_dict = {}
-    userid = request.user.id
-
-    # find transactions that matches that userid
-    transactions = Transaction.objects.filter(
+    # find deliveries that matches that userid
+    deliveries = Transaction.objects.filter(
         delivers__exact=userid).filter(
         delivery_time__isnull=True)
+    context_dict['deliveries'] = deliveries
 
-    # put transactions into the context dictionary
-    context_dict['transactions'] = transactions
-
-    # render
-    return render(request, "orders/mydeliveries.html", context_dict)
+    #render
+    return render(request, "orders/myorders.html", context_dict)
 
 def delivererexchange(request):
     if request.method == 'GET':

@@ -1,0 +1,114 @@
+{% extends 'qracker/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	My Orders
+{% endblock %}
+
+{% block body_block %}
+    <br>
+	<h1>Orders</h1>
+    <br>
+
+    <h1>Requests</h1>
+	{% if requests %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Restaurant</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Delivery Location</th>
+                <th>Order Time</th>
+                <th>Tip</th>
+                <th>Deliverer</th>
+                <th>Exchange?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+            <tr>
+                <td>{{ request.item.supplier }}</td>
+                <td>{{ request.item.name }}</td>
+                <td>{{ request.item.price }}</td>
+                <td>{{ request.quantity }}</td>
+                <td>{{ request.pickup_loc }}</td>
+                <td>{{ request.creation_time }}</td>
+                <td>{{ request.tip }}</td>
+
+                {% if request.delivers %}
+                <td>
+                    <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
+                        <button class="btn btn-primary" type="submit" name="username" value="{{ request.delivers }}">
+                        {{ request.delivers }}
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form role="form" id="recipeint_exchange" method="get" action="/orders/recipientexchange/">
+                        <button class="btn btn-primary" type="submit" name="transactionid" value="{{ request.id }}">Exchange
+                        </button>
+                    </form>
+                </td>
+                {% else %}
+                <td>Searching...</td>
+                <td>N/A</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <strong>You do not have any open requests at this time.</strong>
+    {% endif %}
+
+    <br><br>
+    <h1>Deliveries</h1>
+
+    {% if deliveries %}
+    <table class="table table-bordered table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Restaurant</th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Delivery Location</th>
+                <th>Order Time</th>
+                <th>Tip</th>
+                <th>Requester</th>
+                <th>Exchange?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for delivery in deliveries %}
+            <tr>
+                <td>{{ delivery.item.supplier }}</td>
+                <td>{{ delivery.item.name }}</td>
+                <td>{{ delivery.item.price }}</td>
+                <td>{{ delivery.quantity }}</td>
+                <td>{{ delivery.pickup_loc }}</td>
+                <td>{{ delivery.creation_time }}</td>
+                <td>{{ delivery.tip }}</td>
+                <td>
+                    <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
+                        <button class="btn btn-primary" type="submit" name="username" value="{{ delivery.initiates }}">
+                        {{ delivery.initiates }}
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form role="form" id="deliverer_exchange" method="get" action="/orders/delivererexchange/">
+                        <button class="btn btn-primary" type="submit" name="transactionid" value="{{ delivery.id }}">Exchange</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <strong>You do not have any items to deliver.</strong>
+    {% endif %}
+
+{% endblock %}
