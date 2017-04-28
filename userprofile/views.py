@@ -8,7 +8,7 @@ from userprofile.forms import UserForm, UserProfileForm, PaymentForm
 from userprofile.models import UserProfile, Payment
 from django.core.exceptions import ObjectDoesNotExist
 from orders.models import Transaction
-
+from django.db.models import Q
 
 # registration view
 def register(request):
@@ -149,9 +149,15 @@ def view_current_profile(request):
         delivers=userid).filter(
         delivery_time__isnull=False)
 
+    # Count user level
+    numtransactions = Transaction.objects.filter(
+        Q(initiates__exact=userid)|Q(delivers=userid)).count()
+    level = (numtransactions / 5) + 1
+
     # pass to context dict
-    context_dict = {'user' : user ,
+    context_dict = {'user' : user,
                     'userprofile' : userprofile,
+                    'level' : level,
                     'payment' : payment,
                     'requests' : requests,
                     'deliveries' : deliveries}

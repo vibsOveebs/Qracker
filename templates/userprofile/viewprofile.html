@@ -13,10 +13,14 @@
 			<th>Username</th>
 			<th>{{ user.username }}</th>
 		</tr>
+		<tr>
+			<th>Level</th>
+			<th><strong>{{ level }}</strong></th>
+		</tr>
 		{% if userprofile.picture %}
 		<tr>
 			<th>Picture</th>
-			<th><img src="{{ MEDIA_URL}}{{ userprofile.picture }}" style="width:25%"/></th>
+			<th><img src="{{ MEDIA_URL}}{{ userprofile.picture }}" style="width:40%"/></th>
 		</tr>
 		{% endif %}
 		<tr>
@@ -135,6 +139,6 @@
     {% else %}
     <strong>You have not completed any deliveries.</strong>
     {% endif %}
+    <br>
 
-    </form>
 {% endblock %}
