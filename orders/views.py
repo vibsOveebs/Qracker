@@ -102,13 +102,20 @@ def recipientexchange(request):
             transaction.text_feedback = text_feedback[0:140]
             transaction.delivery_time = datetime.now()
 
-            # Get item price once
+            # Get item price, tip, quantity, and userwallet funds
             price = transaction.item.price
+            tip = transaction.tip
+            wallet = transaction.initiates.userprofile.wallet
+            quantity = transaction.quantity
+
+            # Do funds check again
+            if tip + price*quantity > wallet:
+               return render(request, 'menu/notenoughfunds.html')
 
             # Modify wallets
-            transaction.delivers.userprofile.wallet += transaction.tip          # Add tip to deliverer
-            transaction.initiates.userprofile.wallet -= transaction.tip + price # Subtract price and tip from requester
-            transaction.item.supplier.userprofile.wallet += price                           # Add price to supplier
+            transaction.delivers.userprofile.wallet += tip # Add tip to deliverer
+            transaction.initiates.userprofile.wallet -= tip + price*quantity # Subtract price and tip from requester
+            transaction.item.supplier.userprofile.wallet += price*quantity # Add price to supplier
             
             # Save transaction and updated wallet in database
             transaction.delivers.userprofile.save()

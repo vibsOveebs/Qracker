@@ -6,6 +6,7 @@ from menu.models import Item
 from orders.forms import PartialInitiateForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import user_passes_test
+from decimal import Decimal
 
 def supplier_check(user):
     return user.userprofile.supplier_flag
@@ -190,9 +191,11 @@ def orderitem(request):
 
         form = PartialInitiateForm(request.POST)
 
-        tip = float(request.POST.get('tip'))
-        wallet = float(initiates.userprofile.wallet)
-        if tip + float(item.price) > initiates.userprofile.wallet:
+        tip = Decimal(request.POST.get('tip'))
+        wallet = initiates.userprofile.wallet
+        quantity = int(request.POST.get('quantity'))
+        price = item.price
+        if tip + price*quantity > wallet:
            return render(request, 'menu/notenoughfunds.html')
 
         # save form but don't commit

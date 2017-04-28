@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from orders.models import Transaction
 from django.db.models import Q
 from django.contrib.auth.models import User
+from decimal import Decimal
 
 
 # registration view
@@ -192,8 +193,7 @@ def addfunds(request):
     if request.method == 'GET':
         return render(request, "userprofile/addfunds.html")
     if request.method == 'POST':
-        amount = request.POST.get('amount')
-        amount = int(amount)
+        amount = Decimal(request.POST.get('amount'))
 
         userid = request.user.id
         userprofile = UserProfile.objects.get(
