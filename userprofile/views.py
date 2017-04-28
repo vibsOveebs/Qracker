@@ -9,6 +9,8 @@ from userprofile.models import UserProfile, Payment
 from django.core.exceptions import ObjectDoesNotExist
 from orders.models import Transaction
 from django.db.models import Q
+from django.contrib.auth.models import User
+
 
 # registration view
 def register(request):
@@ -125,7 +127,7 @@ def user_logout(request):
 
 # view profile view
 @login_required
-def view_current_profile(request):
+def view_my_profile(request):
 
     # get user information
     user = request.user
@@ -163,7 +165,27 @@ def view_current_profile(request):
                     'deliveries' : deliveries}
 
     # render
-    return render(request, 'userprofile/viewprofile.html', context_dict)
+    return render(request, 'userprofile/viewmyprofile.html', context_dict)
+
+def view_other_profile(request):
+
+    if request.method == 'GET':
+
+        username = request.GET['username']
+        user = User.objects.get(username=username)
+
+        numtransactions = Transaction.objects.filter(
+            Q(initiates__exact=user.id)|Q(delivers=user.id)).count()
+        level = (numtransactions / 5) + 1
+
+        context_dict = {'user' : user,
+                        'userprofile' : user.userprofile,
+                        'level' : level}
+
+        return render(request, 'userprofile/viewotherprofile.html', context_dict)
+
+    else:
+        return HttpResponse('An error occured. Please return to homepage')
 
 @login_required
 def addfunds(request):

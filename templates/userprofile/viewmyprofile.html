@@ -93,8 +93,14 @@
                 <th>{{ request.quantity }}</th>
                 <th>{{ request.pickup_loc }}</th>
                 <th>{{ request.creation_time }}</th>
-                <th>{{ request.delivery_time }}
-                <th>{{ request.delivers }}</th>
+                <th>{{ request.delivery_time }}</th>
+                <th>
+	                <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
+	                    <button class="btn btn-primary" type="submit" name="username" value="{{ request.delivers }}">
+	                    {{ request.delivers }}
+	                    </button>
+	                </form>
+                </th>
             </tr>
             {% endfor %}
         </tbody>
@@ -130,8 +136,14 @@
                 <th>{{ delivery.quantity }}</th>
                 <th>{{ delivery.pickup_loc }}</th>
                 <th>{{ delivery.creation_time }}</th>
-                <th>{{ delivery.delivery_time }}
-                <th>{{ delivery.initiates }}</th>
+                <th>{{ delivery.delivery_time }}</th>
+                <th>
+	                <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
+	                    <button class="btn btn-primary" type="submit" name="username" value="{{ delivery.initiates }}">
+	                    {{ delivery.initiates }}
+	                    </button>
+	                </form>
+                </th>
             </tr>
             {% endfor %}
         </tbody>

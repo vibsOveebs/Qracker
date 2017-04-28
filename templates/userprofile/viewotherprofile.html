@@ -1,0 +1,41 @@
+{% extends "qracker/base.html" %}
+
+{% block title_block %}
+	Your Profile
+{% endblock %}
+
+{% block body_block %}
+	<br>
+	<h1>{{ user.username}}'s Profile</h1>
+	<table class="table table-bordered table-striped">
+		<tbody>
+		<tr>
+			<th>Username</th>
+			<th>{{ user.username }}</th>
+		</tr>
+		<tr>
+			<th>Level</th>
+			<th><strong>{{ level }}</strong></th>
+		</tr>
+		{% if userprofile.picture %}
+		<tr>
+			<th>Picture</th>
+			<th><img src="{{ MEDIA_URL}}{{ userprofile.picture }}" style="width:40%"/></th>
+		</tr>
+		{% endif %}
+		<tr>
+			<th>Email</th>
+			<th>{{ user.email }}</th>
+		</tr>
+		<tr>
+			<th>Phone Number</th>
+			<th>{{ userprofile.phone_number }}</th>
+		</tr>
+		<tr>
+			<th>Location</th>
+			<th>{{ userprofile.location }}</th>
+		</tr>
+		</tbody>
+	</table>
+
+{% endblock %}

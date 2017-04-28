@@ -34,8 +34,15 @@
                 <th>{{ transaction.pickup_loc }}</th>
                 <th>{{ transaction.creation_time }}</th>
                 <th>{{ transaction.tip }}</th>
+
                 {% if transaction.delivers %}
-                <th>{{ transaction.delivers }}</th>
+                <th>
+                    <form role="form" id="view_other_profile" method="get" action="/userprofile/viewotherprofile/">
+                        <button class="btn btn-primary" type="submit" name="username" value="{{ transaction.delivers }}">
+                        {{ transaction.delivers }}
+                        </button>
+                    </form>
+                </th>
                 <th>
                     <form role="form" id="recipeint_exchange" method="get" action="/orders/recipientexchange/">
                         <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange</button>
@@ -45,6 +52,7 @@
                 <th>Searching...</th>
                 <th>N/A</th>
                 {% endif %}
+                
             </tr>
             {% endfor %}
         </tbody>
