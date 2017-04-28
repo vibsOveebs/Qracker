@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     # profile fields
     supplier_flag = models.BooleanField(default=False)
     location = models.CharField(max_length=128)
-    phone_number = models.IntegerField(validators=[MaxValueValidator(9999999999)])
+    phone_number = models.BigIntegerField(validators=[MaxValueValidator(9999999999)])
     picture = models.ImageField(upload_to='profile_images', blank=True)
     wallet = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
