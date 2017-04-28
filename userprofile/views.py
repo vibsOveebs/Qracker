@@ -32,9 +32,6 @@ def register(request):
             # hash password and send to user object
             user.set_password(user.password)
 
-            # Add user to user group
-            user.groups.add(Group.objects.get(name='customer'))
-
             # save user
             user.save()
 
