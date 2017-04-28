@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^menu/', include('menu.urls')),
     url(r'^orders/', include('orders.urls')),
     url(r'^userprofile/', include('userprofile.urls')),
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^notsupplier', views.notsupplier, name='notsupplier'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

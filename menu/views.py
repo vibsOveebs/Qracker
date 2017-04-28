@@ -5,9 +5,13 @@ from menu.forms import AddItemForm, BrowseForm, SearchForm
 from menu.models import Item
 from orders.forms import PartialInitiateForm
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 
+def supplier_check(user):
+    return user.userprofile.supplier_flag
 
 # add item view
+@user_passes_test(supplier_check, login_url='/notsupplier/')
 def add_menu_item(request):
     form = AddItemForm()
 

@@ -2,7 +2,10 @@ from django.shortcuts import render
 from orders.models import Transaction
 from datetime import datetime
 from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 
+def supplier_check(user):
+    return user.userprofile.supplier_flag
 
 # open requests view
 def openrequests(request):
@@ -139,6 +142,7 @@ def recipientexchange(request):
         # Error
         return render(request, "orders/error.html")
 
+@user_passes_test(supplier_check, login_url='/notsupplier')
 def telereport(request):
 
     context_dict={}
