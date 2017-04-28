@@ -105,7 +105,7 @@ def user_login(request):
         # else bad login details, return error page
         else:
             print("Invalid authentication details.")
-            return HttpResponse("Invalid authentication details")
+            return render(request, 'userprofile/invalidlogin.html')
 
     # else render login form
     else:
