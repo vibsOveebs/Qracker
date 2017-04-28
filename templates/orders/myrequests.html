@@ -19,6 +19,7 @@
                 <th>Quantity</th>
                 <th>Delivery Location</th>
                 <th>Order Time</th>
+                <th>Tip</th>
                 <th>Deliverer</th>
                 <th>Exchange?</th>
             </tr>
@@ -32,6 +33,7 @@
                 <th>{{ transaction.quantity }}</th>
                 <th>{{ transaction.pickup_loc }}</th>
                 <th>{{ transaction.creation_time }}</th>
+                <th>{{ transaction.tip }}</th>
                 {% if transaction.delivers %}
                 <th>{{ transaction.delivers }}</th>
                 <th>

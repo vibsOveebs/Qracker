@@ -4,8 +4,9 @@ from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from userprofile.forms import UserForm, UserProfileForm
-from userprofile.models import UserProfile
+from userprofile.forms import UserForm, UserProfileForm, PaymentForm
+from userprofile.models import UserProfile, Payment
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # registration view
@@ -20,9 +21,10 @@ def register(request):
         # grab information from forms
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
+        payment_form = PaymentForm(data=request.POST)
 
         # if those are valid, continue
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid() and payment_form.is_valid():
 
             # save user form to database
             user = user_form.save()
@@ -49,6 +51,11 @@ def register(request):
             # save userprofile
             profile.save()
 
+            # Do same thing for payment as profile
+            payment = payment_form.save(commit=False)
+            payment.user = user
+            payment.save()
+
             # flag successful registration
             registered = True
 
@@ -60,11 +67,13 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
+        payment_form = PaymentForm()
 
     # Render the template depending on the context.
     return render(request, 'userprofile/register.html',
                       {'user_form': user_form,
                        'profile_form': profile_form,
+                       'payment_form': payment_form,
                        'registered': registered})
 
 
@@ -126,10 +135,39 @@ def view_current_profile(request):
     userprofile = UserProfile.objects.get(
         user_id=userid
     )
+    
+    try:
+        payment = Payment.objects.get(
+            user_id=userid
+        )
+    except ObjectDoesNotExist:
+        payment = None
 
     # pass to context dict
     context_dict = {'user' : user ,
-                    'userprofile' : userprofile}
+                    'userprofile' : userprofile,
+                    'payment' : payment}
 
     # render
     return render(request, 'userprofile/viewprofile.html', context_dict)
+
+@login_required
+def addfunds(request):
+    if request.method == 'GET':
+        return render(request, "userprofile/addfunds.html")
+    if request.method == 'POST':
+        amount = request.POST.get('amount')
+        amount = int(amount)
+
+        userid = request.user.id
+        userprofile = UserProfile.objects.get(
+            user_id=userid
+        )
+
+        userprofile.wallet += amount
+        userprofile.save()
+
+        return render(request, "userprofile/fundsadded.html")
+
+
+

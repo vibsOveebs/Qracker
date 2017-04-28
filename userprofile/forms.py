@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from userprofile.models import UserProfile
+from userprofile.models import UserProfile, Payment
 
 
 # User Form
@@ -23,3 +23,8 @@ class UserProfileForm(forms.ModelForm):
 
         # only show location, phone number, and picture fields
         fields = ('location', 'phone_number', 'picture')
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ('creditcard_number', 'security_code', 'expiration_month', 'expiration_year')

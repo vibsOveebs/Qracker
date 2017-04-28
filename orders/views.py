@@ -115,16 +115,29 @@ def recipientexchange(request):
             transaction.responsetime = responsetime
             transaction.text_feedback = text_feedback[0:140]
             transaction.delivery_time = datetime.now()
+
+            # Get item price once
+            price = transaction.item.price
+
+            # Modify wallets
+            transaction.delivers.userprofile.wallet += transaction.tip          # Add tip to deliverer
+            transaction.initiates.userprofile.wallet -= transaction.tip + price # Subtract price and tip from requester
+            transaction.item.supplier.userprofile.wallet += price                           # Add price to supplier
+            
+            # Save transaction and updated wallet in database
+            transaction.delivers.userprofile.save()
+            transaction.initiates.userprofile.save()
+            transaction.item.supplier.userprofile.save()
             transaction.save()
             # return success
 
-            return HttpResponse("Exchange successful")
+            return render(request, "orders/exchangesuccess.html")
         else :
             # Wrong code message
-            return HttpResponse("Wrong code entered")
+            return render(request, "orders/wrongcode.html")
     else:
         # Error
-        return HttpResponse("Error")
+        return render(request, "orders/error.html")
 
 def telereport(request):
 

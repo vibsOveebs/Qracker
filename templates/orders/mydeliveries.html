@@ -20,6 +20,7 @@
                 <th>Delivery Location</th>
                 <th>Order Time</th>
                 <th>Requester</th>
+                <th>Tip</th>
                 <th>Exchange?</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <th>{{ transaction.pickup_loc }}</th>
                 <th>{{ transaction.creation_time }}</th>
                 <th>{{ transaction.initiates }}</th>
+                <th>{{ transaction.tip }}</th>
                 <th>
                     <form role="form" id="deliverer_exchange" method="get" action="/orders/delivererexchange/">
                         <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Exchange</button>

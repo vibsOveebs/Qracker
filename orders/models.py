@@ -21,6 +21,7 @@ class Transaction(models.Model):
 
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+    tip = models.DecimalField(max_digits=5, decimal_places=2)
 
     code = models.IntegerField(default=generate_code)
 

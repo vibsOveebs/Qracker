@@ -31,11 +31,12 @@ class PartialInitiateForm(forms.ModelForm):
     creation_time = forms.DateTimeField(initial=datetime.now, widget=forms.HiddenInput())
     pickup_loc = forms.ChoiceField(choices=LOC_CHOICES, help_text="Please select a pickup location: ")
     quantity = forms.ChoiceField(choices=QUANTITY_CHOICES, help_text="Please select a quantity: ")
+    tip = forms.DecimalField(help_text="Please enter a tip amount")
     code = forms.IntegerField(widget=forms.HiddenInput(), initial=generate_code)
 
     class Meta:
         model = Transaction
-        fields = ('creation_time', 'pickup_loc', 'quantity', 'code')
+        fields = ('creation_time', 'pickup_loc', 'quantity', 'tip', 'code')
 
 
 # Open Orders Form

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from menu.forms import AddItemForm, BrowseForm, SearchForm
 from menu.models import Item
 from orders.forms import PartialInitiateForm
+from django.http import HttpResponseRedirect, HttpResponse
 
 
 # add item view
@@ -180,14 +181,22 @@ def orderitem(request):
     elif request.method == 'POST':
         # get itemid from request
         itemid = request.POST.get('itemid')
+        item = Item.objects.get(id=itemid)
+        initiates = User.objects.get(id=userid)
+
         form = PartialInitiateForm(request.POST)
+
+        tip = float(request.POST.get('tip'))
+        wallet = float(initiates.userprofile.wallet)
+        if tip + float(item.price) > initiates.userprofile.wallet:
+           return render(request, 'menu/notenoughfunds.html')
 
         # save form but don't commit
         transaction = form.save(commit=False)
 
         # put userid and itemid into form
-        transaction.initiates = User.objects.get(id=userid)
-        transaction.item = Item.objects.get(id=itemid)
+        transaction.initiates = initiates
+        transaction.item = item
 
         # save form, commit
         transaction.save()

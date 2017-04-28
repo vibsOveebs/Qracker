@@ -19,6 +19,8 @@
                 <th>Quantity</th>
                 <th>Delivery Location</th>
                 <th>Order Time</th>
+                <th>Requester</th>
+                <th>Tip</th>
                 <th>Pickup?</th>
             </tr>
         </thead>
@@ -31,6 +33,8 @@
                 <th>{{ transaction.quantity }}</th>
                 <th>{{ transaction.pickup_loc }}</th>
                 <th>{{ transaction.creation_time }}</th>
+                <th>{{ transaction.initiates }}</th>
+                <th>{{ transaction.tip }}</th>
                 <th>
                     <form role="form" id="pickup_item" method="get" action="/orders/pickupitem/">
                         <button class="btn btn-primary" type="submit" name="transactionid" value="{{ transaction.id }}">Pickup</button>
